@@ -17,6 +17,9 @@ const routes: Routes = [
       { path: 'faqs', loadChildren: () => import('src/app/faqs/faqs.module').then(m => m.FaqsModule) },
       { path: 'support-category', loadChildren: () => import('src/app/support-category/support-category.module').then(m => m.SupportCategoryModule) },
       { path: 'support-request', loadChildren: () => import('src/app/support-request/support-request.module').then(m => m.SupportRequestModule) },
+      { path: 'bank-transfer', loadChildren: () => import('src/app/bank-transfer/bank-transfer.module').then(m => m.BankTransferModule) },
+      { path: 'cash-pickup', loadChildren: () => import('src/app/cash-pickup/cash-pickup.module').then(m => m.CashPickupModule) },
+
       ]
   },
   { path: '**', component: NotfoundComponent }
