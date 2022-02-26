@@ -25,7 +25,7 @@ export class NavbarComponent implements OnInit {
   conPass: any;
   permissions: any = {};
   loading: boolean = false;
-  organization_logo_url = "assets/img/vyavsayik.png";
+  organization_logo_url = "assets/img/ALCOPHONY-LOGO.png";
   newNotificationCount: any = 0;
   userImage: any;
   isLicenceValidated = true;

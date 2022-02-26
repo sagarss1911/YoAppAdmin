@@ -10448,7 +10448,7 @@ a:focus {
 }
 
 .bg-gradient-primary {
-    background-color: #112D4E;
+    background-color: #5D009B;
     background-size: cover;
     border-radius: 0 40px 0 0;
 }
@@ -11483,8 +11483,8 @@ input[type=date]:focus::-webkit-datetime-edit {
 }
 
 .sidebar-dark .nav-item .nav-link.active {
-    color: #fff;
-    background: #203592;
+    color: #000;
+    background: #FDBB26;
     border-radius: 0 30px 30px 0;
     position: relative;
 }
