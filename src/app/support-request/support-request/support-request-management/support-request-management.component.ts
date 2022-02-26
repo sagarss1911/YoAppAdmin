@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { SupportCategoryService } from 'src/app/services/support_category.service';
+import { SupportRequestService } from 'src/app/services/support_request.service';
 import { CommonHelper } from 'src/app/helpers/common.helper';
 import { ToastMessageService } from 'src/app/services/toast-message.service';
 import { remove } from 'lodash-es';
@@ -23,27 +23,31 @@ export class SupportRequestManagementComponent implements OnInit {
 
   public paginationValues: Subject<any> = new Subject();
   public table_data: any[] = [];
+  public filters:any = {};
 
   public recordLimit: number = 10;
   public modalRef: BsModalRef;
-  constructor(private supportCategoryService: SupportCategoryService, private commonHelper: CommonHelper,
+  constructor(private supportRequestService: SupportRequestService, private commonHelper: CommonHelper,
     private _toastMessageService: ToastMessageService, private modalService: BsModalService) {
   }
 
   ngOnInit(): void {
-    // this.getSlidersWithFilters({ page: 1 });
-    this.table_data = [{data :{slides : {category : 'category'}}}]
+    this.getSlidersWithFilters({ page: 1 });
   }
 
   getSlidersWithFilters(event) {
     this.loading = true;
     return new Promise((resolve, reject) => {
       let params = {
+        filters: {},
         page: event.page,
         limit: event.limit ? event.limit : this.recordLimit
       };
       this.recordLimit = params.limit;
-      this.supportCategoryService.getAllSupportCategory(params).subscribe((res: any) => {
+      if(this.filters.searchtext) {
+        params["filters"]["searchtext"] = this.filters.searchtext;
+      }
+      this.supportRequestService.getAllSupportRequest(params).subscribe((res: any) => {
         if (res.status == 200 && res.data.slides) {
           this.table_data = [];
           this.table_data = JSON.parse(JSON.stringify(res.data.slides));
@@ -63,11 +67,11 @@ export class SupportRequestManagementComponent implements OnInit {
 
   onClickStatusChange(data){
     console.log(data)
-    if(data){
+    if(data.status == 1){
       this.status = false
 
     } else {
-      this.status =true
+      this.status = true
     }
   }
 
@@ -78,7 +82,7 @@ export class SupportRequestManagementComponent implements OnInit {
     var tempSubObj: Subscription = this.modalService.onHide.subscribe(() => {
       if (this.modalRef.content.decision == "done") {
         this.loading = true;
-        this.supportCategoryService.deleteSupportCategory(slider.id).subscribe((res: any) => {
+        this.supportRequestService.deleteSupportRequest(slider.id).subscribe((res: any) => {
           this.loading = false;
           if (res.status == 200) {
             remove(this.table_data, (ub: any) => ub.id == slider.id);

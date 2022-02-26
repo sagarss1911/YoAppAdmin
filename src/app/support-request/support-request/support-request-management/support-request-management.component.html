@@ -2,15 +2,37 @@
     <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' ,fullScreenBackdrop:true,backdropBackgroundColour:'rgba(255,255,255, 0.01)',primaryColour:'#005eff',secondaryColour:'#005eff',tertiaryColour:'#005eff'}">
     </ngx-loading>
 
-    <!-- <div class="row mb-2" style="justify-content: space-between;margin:0px;margin-bottom: 2rem;">
-        <h1 class="h3 page-title">Support Category</h1>
-        <div>
+    <div class="row mb-2" style="justify-content: space-between;margin:0px;margin-bottom: 2rem;">
+        <h1 class="h3 page-title">Support Request</h1>
+        <!-- <div>
             <div class="btn green-btn" (click)="onClickAddSlider();">
                 <span class="dib mr-2"><i class="fas fa-plus"></i></span>
                 <div class="dib">Add</div>
             </div>
+        </div> -->
+    </div>
+
+
+    <div class="row mb-3">
+        <div class="col-12 col-xl-3 col-md-6">
+          <div class="form-group">
+            <input type="text" class="form-control" id="searchtext" name="searchtext"
+              placeholder="Search by text" #searchtext="ngModel" [(ngModel)]="filters.searchtext">
+          </div>
         </div>
-    </div> -->
+        <div class="col-12 col-xl-6 col-md-6">
+          <div class="form-group">
+            <div class="btn blue-btn" (click)="getSlidersWithFilters({'page':1});">
+              <div class="dib">Search</div>
+            </div>
+            <div class="btn gray-btn ml-3" (click)="filters={};getSlidersWithFilters({'page':1});">
+              <div class="dib">Reset</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
     <div class="row">
         <div class="col-12">
             <div class="c-table-wrapper table-responsive-small">
@@ -18,7 +40,10 @@
                     <thead class="c-table-header">
                         <tr class="c-table-row c-table-row-header">
                             <th class="c-table-cell c-table-header-cell text-pull-left">
-                                title
+                                Category
+                            </th>
+                            <th class="c-table-cell c-table-header-cell text-pull-left">
+                                text
                             </th>
                             <th class="c-table-cell c-table-header-cell text-pull-left">
                                 Status
@@ -28,8 +53,8 @@
                     </thead>
                     <tbody class="c-table-body" *ngIf="table_data && table_data.length>0">
                         <tr class="c-table-row" *ngFor="let tab_data of table_data; let i=index;">
-
-                            <td class="c-table-cell c-table-body-cell text-pull-left">{{(tab_data.category)}}</td>
+                            <td class="c-table-cell c-table-body-cell text-pull-left">{{(tab_data.categoryId)}}</td>
+                            <td class="c-table-cell c-table-body-cell text-pull-left">{{(tab_data.text)}}</td>
                             <td class="c-table-cell c-table-body-cell text-pull-left">
                                 <div class="action-btn" *ngIf="!status" title="Delete Slider" (click)="onClickStatusChange(tab_data)" style="color: #3985fc">
                                     <i class="fa fa-check"></i>

@@ -24,6 +24,7 @@ export class SupportCategoryManagementComponent implements OnInit {
 
   public paginationValues: Subject<any> = new Subject();
   public table_data: any[] = [];
+  public filters:any = {};
 
   public recordLimit: number = 10;
   public modalRef: BsModalRef;
@@ -32,18 +33,21 @@ export class SupportCategoryManagementComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.getSlidersWithFilters({ page: 1 });
-    this.table_data = [{data :{slides : {category : 'category'}}}]
+    this.getSlidersWithFilters({ page: 1 });
   }
 
   getSlidersWithFilters(event) {
     this.loading = true;
     return new Promise((resolve, reject) => {
       let params = {
+        filters: {},
         page: event.page,
         limit: event.limit ? event.limit : this.recordLimit
       };
       this.recordLimit = params.limit;
+      if(this.filters.searchtext) {
+        params["filters"]["searchtext"] = this.filters.searchtext;
+      }
       this.supportCategoryService.getAllSupportCategory(params).subscribe((res: any) => {
         if (res.status == 200 && res.data.slides) {
           this.table_data = [];

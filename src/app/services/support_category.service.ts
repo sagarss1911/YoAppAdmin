@@ -8,10 +8,10 @@ import { environment } from "../../environments/environment";
 export class SupportCategoryService {
 
 
-  private addCategoryUrl = environment.url + "/api/v1/Admin/Category/add_support_category";
-  private updateCategoryUrl = environment.url + "/api/v1/Admin/category/update_support_category/";
-  private getAllCategoryUrl = environment.url + "/api/v1/Admin/category/get_all_support_category";
-  private deleteCategoryUrl = environment.url + "/api/v1/Admin/category/remove_support_category/";
+  private addCategoryUrl = environment.url + "/api/v1/admin/support_category/add_support_category";
+  private updateCategoryUrl = environment.url + "/api/v1/admin/support_category/update_support_category/";
+  private getAllCategoryUrl = environment.url + "/api/v1/admin/Support_category/get_all_support_category/";
+  private deleteCategoryUrl = environment.url + "/api/v1/admin/Support_category/delete_support_category/";
 
 
 

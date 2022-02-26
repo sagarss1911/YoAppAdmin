@@ -8,9 +8,9 @@ import { environment } from "../../environments/environment";
 export class SupportRequestService {
 
 
-  private updateSupportRequestUrl = environment.url + "/api/v1/Admin/request/update_status_support_request/";
-  private getAllSupportRequestUrl = environment.url + "/api/v1/Admin/request/get_all_support_request";
-  private deleteSupportRequestUrl = environment.url + "/api/v1/Admin/request/remove_support_request/";
+  private updateSupportRequestUrl = environment.url + "/api/v1/Admin/support_request/update_status_support_request/";
+  private getAllSupportRequestUrl = environment.url + "/api/v1/Admin/support_request/get_all_support_request";
+  private deleteSupportRequestUrl = environment.url + "/api/v1/Admin/support_request/remove_support_request/";
 
 
 

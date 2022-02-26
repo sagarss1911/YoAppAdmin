@@ -11,6 +11,26 @@
             </div>
         </div>
     </div>
+
+    <div class="row mb-3">
+        <div class="col-12 col-xl-3 col-md-6">
+          <div class="form-group">
+            <input type="text" class="form-control" id="searchtext" name="searchtext"
+              placeholder="Search by title" #searchtext="ngModel" [(ngModel)]="filters.searchtext">
+          </div>
+        </div>
+        <div class="col-12 col-xl-6 col-md-6">
+          <div class="form-group">
+            <div class="btn blue-btn" (click)="getSlidersWithFilters({'page':1});">
+              <div class="dib">Search</div>
+            </div>
+            <div class="btn gray-btn ml-3" (click)="filters={};getSlidersWithFilters({'page':1});">
+              <div class="dib">Reset</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     <div class="row">
         <div class="col-12">
             <div class="c-table-wrapper table-responsive-small">
@@ -26,7 +46,7 @@
                     <tbody class="c-table-body" *ngIf="table_data && table_data.length>0">
                         <tr class="c-table-row" *ngFor="let tab_data of table_data; let i=index;">
 
-                            <td class="c-table-cell c-table-body-cell text-pull-left">{{(tab_data.category)}}</td>
+                            <td class="c-table-cell c-table-body-cell text-pull-left">{{(tab_data.title)}}</td>
 
                             <td style="width: 90px;" class="c-table-cell c-table-body-cell text-pull-right">
                                 <div class="action-btn" title="Edit Slider" (click)="onClickEditSlider(tab_data)" style="color: #3985fc">

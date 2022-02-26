@@ -54,7 +54,7 @@ export class AddUpdateSupportCategoryModalComponent extends BaseModalComponent i
     this.supportCategoryService.addSupportCategory(params).subscribe((res: any) => {
       this.loading = false;
       if (res.status == 200 && res.data) {
-        this._toastMessageService.alert("success", "FAQs added successfully.");
+        this._toastMessageService.alert("success", "Support category added successfully.");
         this.dialogResult = res.data;
         this.done();
       }
