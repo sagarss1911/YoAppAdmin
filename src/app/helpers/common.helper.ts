@@ -31,34 +31,8 @@ export class CommonHelper {
         }
     }
 
-    getCloudResourceFile(tFile) {
-      return new Promise((resolve, reject) => {
-        this.cloudDataURLToBlob(tFile).then((result: any) => {
-          var blob = new Blob([new Uint8Array(result.data.data)]);
-          const url = URL.createObjectURL(blob);
-          return resolve(this.sanitizer.bypassSecurityTrustUrl(url));
-        }).catch(error => {
-          return resolve(null);
-        })
-      })
-    }
 
-    cloudDataURLToBlob(dataURL) {
-      return new Promise((resolve, reject) => {
 
-      })
-    }
-
-    getImageFile(tFile) {
-      return new Promise((resolve,reject) => {
-        this.dataURLToBlob(tFile).then(result =>  {
-          const url = URL.createObjectURL(result);
-          return resolve(this.sanitizer.bypassSecurityTrustResourceUrl(url));
-        }).catch(error => {
-          return  resolve(null);
-        })
-      })
-    }
 
     dataURLToBlob(dataURL) {
         return new Promise((resolve,reject) => {
@@ -66,21 +40,7 @@ export class CommonHelper {
         })
     }
 
-    getVisaStatusList(withAllOption) {
-      let vsl = [
-        {id:"Citizen",name:"Citizen"},
-        {id:"Green Card",name:"Green Card"},
-        {id:"EAD",name:"EAD"},
-        {id:"H1",name:"H1"},
-        {id:"OPT",name:"OPT"}
-      ];
 
-      if(withAllOption) {
-        vsl.unshift({id:null,name:"All"});
-      }
-
-      return vsl;
-    }
     downloadSampleFile(data, filename='data',headers) {
       let csvData = this.ConvertToCSVWithourSRNO(data, headers);
       let blob = new Blob(['\ufeff' + csvData], { type: 'text/csv;charset=utf-8;' });
