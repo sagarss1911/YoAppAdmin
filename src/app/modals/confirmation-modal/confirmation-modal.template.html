@@ -1,0 +1,10 @@
+<div class="modal-body custom-modal-body">
+    <div class="row mt-2">
+      <div class="col-12" class="cnf-text">{{confirmation_text}}</div>
+    </div>
+    <div class="footer-block  mb-3 mt-3">
+      <button type="submit" class="btn green-btn mr-4" (click)="done()">{{type == 'normal' ? 'Yes' : 'Yes, delete it!'}}</button>
+      <button type="button" class="btn gray-btn" (click)="onClose()">{{type == 'normal' ? 'No' : 'No, keep it'}}</button>
+    </div>
+</div>
+

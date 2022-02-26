@@ -1,0 +1,21 @@
+<div class="pagination-wrapper" *ngIf="totalTableRecords && totalTableRecords>0 && selectedLimit<totalTableRecords">
+  <div>Total Records: {{totalTableRecords}}</div>
+  <ul class="pagination" style="padding-left: 8rem;">
+    <li class="page-item"><a class="page-link" (click)="changePage(-1)"><i class="fa fa-caret-left"
+          aria-hidden="true"></i></a></li>
+    <ng-template ngFor let-p [ngForOf]="pages">
+      <li class="page-item" [class.pagination_active]="activePageNumber == p"><a class="page-link" *ngIf="showPages(p)"
+          (click)="onChangePage(p,0)">{{p}}</a></li>
+    </ng-template>
+    <li class="page-item"><a class="page-link" (click)="changePage(+1)"> <i class="fa fa-caret-right"
+          aria-hidden="true"></i> </a></li>
+  </ul>
+  <div class="per-page-record-count">
+    Show
+    <select [(ngModel)]="selectedLimit" class="selecet_box_types" (change)="queryLimitChange(selectedLimit)">
+      <option value="10">10</option>
+      <option value="20">20</option>
+    </select>
+    Records
+  </div>
+</div>

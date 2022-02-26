@@ -1,0 +1,182 @@
+<ngx-loading [show]="loading"
+  [config]="{ backdropBorderRadius: '14px' ,fullScreenBackdrop:true,backdropBackgroundColour:'rgba(0, 0, 0, 0.05)',primaryColour:'#005eff',secondaryColour:'#005eff',tertiaryColour:'#005eff'}">
+</ngx-loading>
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+  <!-- Sidebar -->
+  <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
+    <!-- Sidebar Toggler (Sidebar) -->
+    <!-- <div class="right-toggle">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div> -->
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex">
+      <ng-template [ngIf]="organization_logo_url">
+        <img [src]="organization_logo_url">
+      </ng-template>
+      <!-- <div class="sidebar-brand-text mx-3">Excel <span>Hire</span></div> -->
+    </a>
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item">
+      <a class="nav-link" routerLink='/dashboard' routerLinkActive="active">
+        <span>Dashboard</span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink='/faqs' routerLinkActive="active">
+        <span>FAQ</span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink='/legal' routerLinkActive="active">
+        <span>Legal</span></a  >
+    </li>
+
+  </ul>
+  <div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Main Content -->
+    <div id="content">
+      <!-- Topbar -->
+      <nav class="navbar navbar-expand navbar-light bg-white topbar static-top shadow">
+        <!-- Sidebar Toggle (Topbar) -->
+        <button id="sidebarToggleTop" class="btn rounded-circle mr-1">
+          <i class="fa fa-bars"></i>
+        </button>
+        <h4 class="capitalize mb-0 orgname"> {{orgname }}</h4>
+
+        <!-- Topbar Navbar -->
+        <ul class="navbar-nav ml-auto">
+
+          <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+          <li class="nav-item dropdown no-arrow d-sm-none">
+            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-search fa-fw"></i>
+            </a>
+            <!-- Dropdown - Messages -->
+            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+              aria-labelledby="searchDropdown">
+              <form class="form-inline mr-auto w-100 navbar-search">
+                <div class="input-group">
+                  <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                    aria-label="Search" aria-describedby="basic-addon2">
+                  <div class="input-group-append">
+                    <button class="btn btn-primary" type="button">
+                      <i class="fas fa-search fa-sm"></i>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </li>
+
+          <!-- Nav Item - Alerts -->
+
+
+          <!-- Nav Item - User Information -->
+          <li class="nav-item dropdown no-arrow">
+
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <img [src]="userImage" alt="Avatar" class="avatar" *ngIf="userImage">
+              <img src="assets/img/male-avatar.png" alt="Avatar" class="avatar" *ngIf="!userImage">
+            </a>
+            <!-- Dropdown - User Information -->
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+              <a class="user-name">{{clientName}}</a>
+              <hr style="margin-top: 0.75rem;margin-bottom: 0.75rem;">
+              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Logout
+              </a>
+              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#changePass">
+                <i class="fas fa-lock fa-sm fa-fw mr-2 text-gray-400"></i> Change Password
+              </a>
+            </div>
+          </li>
+
+        </ul>
+
+      </nav>
+      <!-- End of Topbar -->
+      <div style="overflow-x: hidden;overflow-y: auto;height: calc(100vh - 3.375rem);padding-top: 1rem;">
+        <router-outlet></router-outlet>
+      </div>
+      <!-- Scroll to Top Button-->
+      <!-- <a class="scroll-to-top rounded" (click)="scrollToTop()">
+                <i class="fas fa-angle-up"></i>
+            </a> -->
+
+    </div>
+  </div>
+</div>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+        <a class="btn btn-primary" data-dismiss="modal" (click)="logout()">Logout</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- chnage password -->
+<div class="modal fade" id="changePass" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Change Password?</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <form #f="ngForm" novalidate autocomplete="off">
+            <div class="form-group">
+              <label>Old Password</label>
+              <input type="password" class="form-control" name="old_password" #old_password="ngModel"
+                [(ngModel)]="oldPass" required>
+              <div class="alert alert-danger" *ngIf="old_password.touched && old_password.invalid">
+                <p>Please enter the previous password</p>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>New Password</label>
+              <input type="password" class="form-control" name="new_password" #new_password="ngModel"
+                [(ngModel)]="newPass" required minlength="5">
+              <div class="alert alert-danger" *ngIf="new_password.touched && new_password.invalid">
+                <p *ngIf="new_password.errors.required">Please enter the password</p>
+                <p *ngIf="new_password.errors.minlength">New password cannot be less than 5 characters</p>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Confirm Password</label>
+              <input type="password" class="form-control" name="confirm_pass" #confirm_pass="ngModel"
+                [(ngModel)]="conPass" pattern="{{new_password.value}}" required>
+              <div class="alert alert-danger" *ngIf="confirm_pass.touched && confirm_pass.invalid">
+                <p *ngIf="confirm_pass.errors.required">Please enter the password again</p>
+                <p *ngIf="confirm_pass.errors.pattern">Password doesnot match</p>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="cancelChangePass" type="button" data-dismiss="modal">Cancel</button>
+        <button class="btn btn-primary" [disabled]="f.invalid" (click)="changePassword()">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+.sticky-footer {
+	position: relative;	
+	padding: 0;
+    height: 3.375rem;
+    margin-top: 1.375rem;
+}
+
+.footer-column{
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	height: 3.375rem;
+}
+
+.footer-column > div {
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row;
+}
+
+.powered-by {
+    font-size: 12px;
+    margin-right: 15px;
+}
+
+.powered-by .title {
+	font-weight: bold;
+}
+
+.powered-by .title span {
+	color: #fc5949;
+}
+
+.powered-by a:hove {
+	text-decoration: underline;
+}

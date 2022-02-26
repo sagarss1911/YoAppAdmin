@@ -1,0 +1,42 @@
+.toast-message-wrapper {
+    max-width: 600px;
+    height: max-content;
+    margin: auto;
+    color: #fff;
+    text-align: center;
+    z-index: 100000;
+    top: 20px;
+    left: 0;
+    right: 0;
+    position: fixed;
+    height: 0px;
+}
+
+.toast-message-wrapper div {
+    font-size: 14px;
+    /*white-space: nowrap;*/
+    padding: 13px;
+    /*border-radius: 50px;*/
+    margin: 3px;
+    color: white;
+    width: 100%;
+}
+.success {
+	background-color: rgba(99, 177, 45, 1);
+    color: white;
+}
+
+.error {
+	background-color: rgba(241, 8, 8, 1);
+    color: white;
+}
+
+.info {
+	background-color: #007bff;
+    color: white;
+}
+
+.warning {
+	background-color: #ffc107;
+}
+

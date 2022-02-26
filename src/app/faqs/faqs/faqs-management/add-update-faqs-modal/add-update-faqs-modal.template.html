@@ -1,0 +1,50 @@
+<ngx-loading [show]="loading"
+  [config]="{ backdropBorderRadius: '14px' ,fullScreenBackdrop:false,backdropBackgroundColour:'rgba(255,255,255, 0.01)',primaryColour:'#005eff',secondaryColour:'#005eff',tertiaryColour:'#005eff'}">
+</ngx-loading>
+
+<div class="modal-header custom-modal-header">
+  <div style="font-size: 20px;">
+    {{dialogType == 'update' ? 'Update FAQS' : 'Add FAQS'}}
+  </div>
+  <div class="modal-header-close-btn" (click)="onClose()">
+    x
+  </div>
+</div>
+
+<div class="modal-body custom-modal-body" *ngIf="setting_Obj">
+  <form #f="ngForm" novalidate autocomplete="off">
+
+    <div class="row">
+      <div class="col-12 ">
+        <div class="form-group">
+          <label>questions</label>
+          <input type="text" class="form-control" id="question" name="question" placeholder="Enter question "
+            #question="ngModel" [(ngModel)]="setting_Obj.question" required />
+          <div class="alert alert-danger" *ngIf="question.touched && question.invalid">
+            <p>question can't be blank.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 ">
+        <div class="form-group">
+          <label>Answers</label>
+          <div [class.is-invalid]="f.submitted && (answer.invalid || !setting_Obj.answer)">
+            <div [ngxSummernote]="config" name="answer" #answer="ngModel" [(ngModel)]="setting_Obj.answer"></div>
+          </div>
+          <div class="alert alert-danger" *ngIf="answer.touched && answer.invalid">
+            <p>Content can't be blank.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-block  mb-2 mt-4">
+      <button type="submit" *ngIf="dialogType == 'add'" class="btn green-btn"
+        [disabled]="f.invalid || !setting_Obj.question || !setting_Obj.answer" (click)="addFaqs()">Add</button>
+      <button type="submit" *ngIf="dialogType == 'update'" class="btn green-btn"
+        [disabled]="f.invalid || !setting_Obj.question || !setting_Obj.answer" (click)="updateFaqs()">Update
+        FAQS</button>
+      <button type="button" class="btn gray-btn" (click)="onClose()">Cancel</button>
+    </div>
+  </form>
+</div>
