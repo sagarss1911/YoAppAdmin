@@ -1,0 +1,33 @@
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' ,fullScreenBackdrop:false,backdropBackgroundColour:'rgba(255,255,255, 0.01)',primaryColour:'#005eff',secondaryColour:'#005eff',tertiaryColour:'#005eff'}">
+</ngx-loading>
+
+<div class="modal-header custom-modal-header">
+    <div style="font-size: 20px;">
+        {{dialogType == 'update' ? 'Update Support Category' : 'Add Support Category'}}
+    </div>
+    <div class="modal-header-close-btn" (click)="onClose()">
+        x
+    </div>
+</div>
+
+<div class="modal-body custom-modal-body" *ngIf="setting_Obj">
+    <form #f="ngForm" novalidate autocomplete="off">
+        <div class="row">
+            <div class="col-12 ">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="Enter title " #title="ngModel" [(ngModel)]="setting_Obj.title" required />
+                    <div class="alert alert-danger" *ngIf="title.touched && title.invalid">
+                        <p>title can't be blank.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-block  mb-2 mt-4">
+            <button type="submit" *ngIf="dialogType == 'add'" class="btn green-btn" [disabled]="f.invalid || !setting_Obj.title" (click)="addSupportCategory()">Add</button>
+            <button type="submit" *ngIf="dialogType == 'update'" class="btn green-btn" [disabled]="f.invalid || !setting_Obj.title" (click)="updateSupportCategory()">Update
+        </button>
+            <button type="button" class="btn gray-btn" (click)="onClose()">Cancel</button>
+        </div>
+    </form>
+</div>

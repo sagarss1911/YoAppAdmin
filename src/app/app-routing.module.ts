@@ -15,7 +15,9 @@ const routes: Routes = [
       { path: 'dashboard', loadChildren: () => import('src/app/dashboard/dashboard.module').then(m => m.DashboardModule) },
       { path: 'legal', loadChildren: () => import('src/app/legal/legal.module').then(m => m.LegalModule) },
       { path: 'faqs', loadChildren: () => import('src/app/faqs/faqs.module').then(m => m.FaqsModule) },
-    ]
+      { path: 'support-category', loadChildren: () => import('src/app/support-category/support-category.module').then(m => m.SupportCategoryModule) },
+      { path: 'support-request', loadChildren: () => import('src/app/support-request/support-request.module').then(m => m.SupportRequestModule) },
+      ]
   },
   { path: '**', component: NotfoundComponent }
 ]
