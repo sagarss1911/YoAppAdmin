@@ -19,11 +19,11 @@ export class SupportRequestManagementComponent implements OnInit {
 
   base_url = environment.url;
   public dialogType: string = "add";
-  status : boolean = true
+  status: boolean = true
 
   public paginationValues: Subject<any> = new Subject();
   public table_data: any[] = [];
-  public filters:any = {};
+  public filters: any = {};
 
   public recordLimit: number = 10;
   public modalRef: BsModalRef;
@@ -44,7 +44,7 @@ export class SupportRequestManagementComponent implements OnInit {
         limit: event.limit ? event.limit : this.recordLimit
       };
       this.recordLimit = params.limit;
-      if(this.filters.searchtext) {
+      if (this.filters.searchtext) {
         params["filters"]["searchtext"] = this.filters.searchtext;
       }
       this.supportRequestService.getAllSupportRequest(params).subscribe((res: any) => {
@@ -65,35 +65,52 @@ export class SupportRequestManagementComponent implements OnInit {
     });
   }
 
-  onClickStatusChange(data){
-    console.log(data)
-    if(data.status == 1){
-      this.status = false
-
-    } else {
-      this.status = true
-    }
-  }
-
-  onClickDeleteSlider(slider) {
-    this.modalRef = this.modalService.show(ConfirmationModalComponent, { class: 'confirmation-modal', backdrop: 'static', keyboard: false });
-    this.modalRef.content.decision = '';
-    this.modalRef.content.confirmation_text = "Are you sure to delete this FAQ?"
-    var tempSubObj: Subscription = this.modalService.onHide.subscribe(() => {
-      if (this.modalRef.content.decision == "done") {
-        this.loading = true;
-        this.supportRequestService.deleteSupportRequest(slider.id).subscribe((res: any) => {
-          this.loading = false;
-          if (res.status == 200) {
-            remove(this.table_data, (ub: any) => ub.id == slider.id);
-            this._toastMessageService.alert("success", "FAQS deleted successfully.");
-          }
-        }, (error) => {
-          this.loading = false;
-          this.commonHelper.showError(error);
-        });
+  onClickStatusChange(data) {
+    this.loading = true;
+    this.supportRequestService.updateStatusSupportRequest(data.id,{ newStatus: !data.status }).subscribe((res: any) => {
+      if (res.status == 200) {
+        data.status = !data.status;
+        this._toastMessageService.alert("success","Status Updated Successfully");
       }
-      tempSubObj.unsubscribe();
-    });
+      this.loading = false;
+
+    }, (error) => {
+      this.loading = false;
+      this.commonHelper.showError(error);
+
+    })
   }
+  exportCurrent(){
+    this.loading = true;
+    let headerList = ["email","name","phone","status","text","title"]
+    this.table_data = this.table_data.map((m:any) => {return {...m, status: m.status == 1 ? "Resolved" : "Pending"}})
+    this.commonHelper.downloadFile(this.table_data,"Support Request", headerList);
+    this.loading = false;
+  }
+  exportAll(){
+    let params = {
+      filters: {}
+    };
+    if (this.filters.searchtext) {
+      params["filters"]["searchtext"] = this.filters.searchtext;
+    }
+    this.loading = true;
+    this.supportRequestService.exportAllSupportRequest(params).subscribe((res: any) => {
+      if (res.status == 200 && res.data) {
+
+        let headerList = ["email","name","phone","status","text","title"]
+        this.commonHelper.downloadFile(JSON.parse(JSON.stringify(res.data)),"Support Request All", headerList);
+
+      } else if (res.status == 400) {
+        this._toastMessageService.alert("error", res.data.msg);
+      }
+      this.loading = false;
+
+    }, (error) => {
+      this.loading = false;
+      this.commonHelper.showError(error);
+
+    })
+  }
+
 }

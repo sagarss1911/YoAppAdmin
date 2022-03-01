@@ -4,12 +4,6 @@
 
     <div class="row mb-2" style="justify-content: space-between;margin:0px;margin-bottom: 2rem;">
         <h1 class="h3 page-title">Support Request</h1>
-        <!-- <div>
-            <div class="btn green-btn" (click)="onClickAddSlider();">
-                <span class="dib mr-2"><i class="fas fa-plus"></i></span>
-                <div class="dib">Add</div>
-            </div>
-        </div> -->
     </div>
 
 
@@ -30,6 +24,16 @@
             </div>
           </div>
         </div>
+        <div class="col-12 col-xl-3 col-md-6" style="text-align: right;">
+          <div class="form-group">
+            <div class="btn blue-btn" (click)="exportCurrent();">
+              <div class="dib">Export</div>
+            </div>
+            <div class="btn gray-btn ml-3" (click)="exportAll();">
+              <div class="dib">Export All</div>
+            </div>
+          </div>
+        </div>
       </div>
 
 
@@ -43,31 +47,39 @@
                                 Category
                             </th>
                             <th class="c-table-cell c-table-header-cell text-pull-left">
-                                text
+                                Text/Issue
                             </th>
+                            <th class="c-table-cell c-table-header-cell text-pull-left">
+                              User Name
+                          </th>
+                          <th class="c-table-cell c-table-header-cell text-pull-left">
+                            User Email
+                        </th>
+                        <th class="c-table-cell c-table-header-cell text-pull-left">
+                          User Phone
+                      </th>
                             <th class="c-table-cell c-table-header-cell text-pull-left">
                                 Status
                             </th>
-                            <th class="c-table-cell c-table-header-cell text-pull-right">Actions</th>
+
                         </tr>
                     </thead>
                     <tbody class="c-table-body" *ngIf="table_data && table_data.length>0">
                         <tr class="c-table-row" *ngFor="let tab_data of table_data; let i=index;">
-                            <td class="c-table-cell c-table-body-cell text-pull-left">{{(tab_data.categoryId)}}</td>
+                            <td class="c-table-cell c-table-body-cell text-pull-left">{{(tab_data.title)}}</td>
                             <td class="c-table-cell c-table-body-cell text-pull-left">{{(tab_data.text)}}</td>
+                            <td class="c-table-cell c-table-body-cell text-pull-left">{{(tab_data.name)}}</td>
+                            <td class="c-table-cell c-table-body-cell text-pull-left">{{(tab_data.email)}}</td>
+                            <td class="c-table-cell c-table-body-cell text-pull-left">{{(tab_data.phone)}}</td>
                             <td class="c-table-cell c-table-body-cell text-pull-left">
-                                <div class="action-btn" *ngIf="!status" title="Delete Slider" (click)="onClickStatusChange(tab_data)" style="color: #3985fc">
+                                <div class="action-btn" *ngIf="!tab_data.status" title="Mark As Resolved" (click)="onClickStatusChange(tab_data)" style="color: #3985fc">
                                     <i class="fa fa-check"></i>
                                 </div>
-                                <div class="action-btn" *ngIf="status" title="Delete Slider" (click)="onClickStatusChange(tab_data)" style="color: #ff5151">
+                                <div class="action-btn" *ngIf="tab_data.status" title="Mark As Pending" (click)="onClickStatusChange(tab_data)" style="color: #ff5151">
                                     <i class="fa fa-times"></i>
                                 </div>
                             </td>
-                            <td style="width: 90px;" class="c-table-cell c-table-body-cell text-pull-right">
-                                <div class="action-btn" title="Delete Slider" (click)="onClickDeleteSlider(tab_data)" style="color: #ff5151">
-                                    <i class="fa fa-trash"></i>
-                                </div>
-                            </td>
+
                         </tr>
                     </tbody>
                     <tbody class="c-table-body" *ngIf="(!table_data || table_data.length==0)">

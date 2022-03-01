@@ -97,6 +97,9 @@ export class CommonHelper {
       dwldLink.click();
       document.body.removeChild(dwldLink);
   }
+  titleCase(str) {
+    return str.toLowerCase().replace(/\b(\w)/g, s => s.toUpperCase());
+  }
 
   ConvertToCSV(objArray, headerList) {
        let array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
@@ -104,7 +107,7 @@ export class CommonHelper {
        let row = 'S.No,';
 
        for (let index in headerList) {
-           row += headerList[index] + ',';
+           row += this.titleCase(headerList[index]) + ',';
        }
        row = row.slice(0, -1);
        str += row + '\r\n';

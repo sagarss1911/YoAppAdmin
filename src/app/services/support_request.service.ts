@@ -8,9 +8,10 @@ import { environment } from "../../environments/environment";
 export class SupportRequestService {
 
 
-  private updateSupportRequestUrl = environment.url + "/api/v1/Admin/support_request/update_status_support_request/";
+  private updateSupportRequestUrl = environment.url + "/api/v1/Admin/support_request/update_support_request_status/";
   private getAllSupportRequestUrl = environment.url + "/api/v1/Admin/support_request/get_all_support_request";
-  private deleteSupportRequestUrl = environment.url + "/api/v1/Admin/support_request/remove_support_request/";
+  private exportAllSupportRequestUrl = environment.url + "/api/v1/Admin/support_request/export_all_support_request";
+
 
 
 
@@ -27,8 +28,9 @@ export class SupportRequestService {
   getAllSupportRequest(data) {
     return this.http.post(this.getAllSupportRequestUrl, data, { 'headers': this.getHeader() });
   }
-  deleteSupportRequest(id) {
-    return this.http.delete(this.deleteSupportRequestUrl + id, { 'headers': this.getHeader() })
+  exportAllSupportRequest(data) {
+    return this.http.post(this.exportAllSupportRequestUrl, data, { 'headers': this.getHeader() });
   }
+
 
 }

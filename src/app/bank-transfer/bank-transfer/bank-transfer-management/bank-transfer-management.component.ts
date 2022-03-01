@@ -26,7 +26,7 @@ export class  BankTransferManagementComponent implements OnInit {
 
   public recordLimit: number = 10;
   public modalRef: BsModalRef;
-  constructor(private BankTransferService: BankTransferService, private commonHelper: CommonHelper,
+  constructor(private bankTransferService: BankTransferService, private commonHelper: CommonHelper,
     private _toastMessageService: ToastMessageService, private modalService: BsModalService) {
   }
 
@@ -48,11 +48,11 @@ export class  BankTransferManagementComponent implements OnInit {
         if(this.filters.searchtext) {
         params["filters"]["searchtext"] = this.filters.searchtext;
       }
-      this.BankTransferService.getAllBankDetails(params).subscribe((res: any) => {
-        if (res.status == 200 && res.data) {
+      this.bankTransferService.getAllBankDetails(params).subscribe((res: any) => {
+        if (res.status == 200 && res.data.slides) {
           this.table_data = [];
-          this.table_data = JSON.parse(JSON.stringify(res.data));
-          console.log(this.table_data)
+          this.table_data = JSON.parse(JSON.stringify(res.data.slides));
+
           this.paginationValues.next({ type: 'page-init', page: params.page, totalTableRecords: res.data.total_count });
         } else if (res.status == 400) {
           this._toastMessageService.alert("error", res.data.msg);
@@ -65,38 +65,55 @@ export class  BankTransferManagementComponent implements OnInit {
         return resolve(false);
       })
     });
-     
+
   }
 
   onClickStatusChange(data){
-    console.log(data)
-    if(data){
-      this.status = false
+    this.loading = true;
+    let newStatus = data.status == "pending" ? "completed" : "pending";
+    this.bankTransferService.updateStatusBankRequest(data.id,{ newStatus: newStatus }).subscribe((res: any) => {
+      if (res.status == 200) {
+        data.status = newStatus;
+        this._toastMessageService.alert("success","Status Updated Successfully");
+      }
+      this.loading = false;
 
-    } else {
-      this.status =true
-    }
+    }, (error) => {
+      this.loading = false;
+      this.commonHelper.showError(error);
+
+    })
   }
 
-  onClickDeleteSlider(slider) {
-    // this.modalRef = this.modalService.show(ConfirmationModalComponent, { class: 'confirmation-modal', backdrop: 'static', keyboard: false });
-    // this.modalRef.content.decision = '';
-    // this.modalRef.content.confirmation_text = "Are you sure to delete this FAQ?"
-    // var tempSubObj: Subscription = this.modalService.onHide.subscribe(() => {
-    //   if (this.modalRef.content.decision == "done") {
-    //     this.loading = true;
-    //     this.BankTransferService.deleteSupportCategory(slider.id).subscribe((res: any) => {
-    //       this.loading = false;
-    //       if (res.status == 200) {
-    //         remove(this.table_data, (ub: any) => ub.id == slider.id);
-    //         this._toastMessageService.alert("success", "FAQS deleted successfully.");
-    //       }
-    //     }, (error) => {
-    //       this.loading = false;
-    //       this.commonHelper.showError(error);
-    //     });
-    //   }
-    //   tempSubObj.unsubscribe();
-    // });
+  exportCurrent(){
+    this.loading = true;
+    let headerList = ["address","amount","bank_account","bank_name","country","email","name","phone",'status','transaction_id']
+    this.commonHelper.downloadFile(this.table_data,"Bank Transfer Request", headerList);
+    this.loading = false;
+  }
+  exportAll(){
+    let params = {
+      filters: {}
+    };
+    if (this.filters.searchtext) {
+      params["filters"]["searchtext"] = this.filters.searchtext;
+    }
+    this.loading = true;
+    this.bankTransferService.exportAllBankRequest(params).subscribe((res: any) => {
+      if (res.status == 200 && res.data) {
+
+        let headerList = ["address","amount","bank_account","bank_name","country","email","name","phone",'status','transaction_id']
+        this.commonHelper.downloadFile(JSON.parse(JSON.stringify(res.data)),"Support Transfer Request All", headerList);
+
+      } else if (res.status == 400) {
+        this._toastMessageService.alert("error", res.data.msg);
+      }
+      this.loading = false;
+
+    }, (error) => {
+      this.loading = false;
+      this.commonHelper.showError(error);
+
+    })
   }
 }

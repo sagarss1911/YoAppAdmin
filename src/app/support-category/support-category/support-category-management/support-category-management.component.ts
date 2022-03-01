@@ -91,7 +91,7 @@ export class SupportCategoryManagementComponent implements OnInit {
           this.loading = false;
           if (res.status == 200) {
             remove(this.table_data, (ub: any) => ub.id == slider.id);
-            this._toastMessageService.alert("success", "FAQS deleted successfully.");
+            this._toastMessageService.alert("success", "Support Category deleted successfully.");
           }
         }, (error) => {
           this.loading = false;
