@@ -15,7 +15,7 @@
 
               <div class="p-4 login-form-block" *ngIf="step == 'login'">
                 <div class="logo">
-                  <img src="assets/img/vyavsayik.png">
+                  <img src="assets/img/ALCOPHONY-LOGO.png">
                   <!-- <h1 class="h2 title-login font-weight-bold">Excel <span>Hire</span></h1> -->
                 </div>
                 <form class="user" #f="ngForm" novalidate autocomplete="off">
@@ -40,9 +40,7 @@
                     (click)="login()">Login</button>
                 </form>
                 <hr>
-                <div class="text-center mt-3">
-                  <a class="nav-lnk" (click)="changeStep('forgot-password')">Forgot password?</a>
-                </div>
+                    
               </div>
 
               <div class="p-4 login-form-block" *ngIf="step == 'forgot-password'">
