@@ -1,79 +1,112 @@
 <div class="container-fluid management-tab">
-    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' ,fullScreenBackdrop:true,backdropBackgroundColour:'rgba(255,255,255, 0.01)',primaryColour:'#005eff',secondaryColour:'#005eff',tertiaryColour:'#005eff'}">
-    </ngx-loading>
-
-    <!-- <div class="row mb-2" style="justify-content: space-between;margin:0px;margin-bottom: 2rem;">
-        <h1 class="h3 page-title">Support Category</h1>
-        <div>
-            <div class="btn green-btn" (click)="onClickAddSlider();">
-                <span class="dib mr-2"><i class="fas fa-plus"></i></span>
-                <div class="dib">Add</div>
-            </div>
-        </div>
-    </div> -->
-    <div class="row">
-        <div class="col-12 col-xl-3 col-md-6">
-            <div class="form-group">
-                <input type="text" class="form-control" id="searchtext" name="searchtext" placeholder="Search by name" #searchtext="ngModel" [(ngModel)]="filters.searchtext">
-            </div>
-        </div>
-        <div class="col-12 col-xl-6 col-md-6">
-            <div class="form-group">
-                <div class="btn blue-btn" (click)="getSlidersWithFilters({'page':1});">
-                    <div class="dib">Search</div>
-                </div>
-                <div class="btn gray-btn ml-3" (click)="filters={};getSlidersWithFilters({'page':1});">
-                    <div class="dib">Reset</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12">
-            <div class="c-table-wrapper table-responsive-small">
-                <table class="c-table">
-                    <thead class="c-table-header">
-                        <tr class="c-table-row c-table-row-header">
-                            <th class="c-table-cell c-table-header-cell text-pull-left">
-                                title
-                            </th>
-                            <th class="c-table-cell c-table-header-cell text-pull-left">
-                                Status
-                            </th>
-                            <th class="c-table-cell c-table-header-cell text-pull-right">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody class="c-table-body" *ngIf="table_data && table_data.length>0">
-                        <tr class="c-table-row" *ngFor="let tab_data of table_data; let i=index;">
-                            <td class="c-table-cell c-table-body-cell text-pull-left">{{(tab_data.category)}}</td>
-                            <td class="c-table-cell c-table-body-cell text-pull-left">
-                                <div class="action-btn" *ngIf="!status" title="Delete Slider" (click)="onClickStatusChange(tab_data)" style="color: #3985fc">
-                                    <i class="fa fa-check"></i>
-                                </div>
-                                <div class="action-btn" *ngIf="status" title="Delete Slider" (click)="onClickStatusChange(tab_data)" style="color: #ff5151">
-                                    <i class="fa fa-times"></i>
-                                </div>
-                            </td>
-                            <td style="width: 90px;" class="c-table-cell c-table-body-cell text-pull-right">
-                                <div class="action-btn" title="Delete Slider" (click)="onClickDeleteSlider(tab_data)" style="color: #ff5151">
-                                    <i class="fa fa-trash"></i>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tbody class="c-table-body" *ngIf="(!table_data || table_data.length==0)">
-                        <tr class="c-table-row">
-                            <td class="c-table-cell c-table-body-cell text-center" colspan="6">{{loading ? "Fetching a Data" : "No Data Available"}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div>
-                <div class="share-pagination">
-                    <app-shared-pagination [paginationValues]="paginationValues" (onChange)="getSlidersWithFilters($event)">
-                    </app-shared-pagination>
-                </div>
-            </div>
-        </div>
+  <ngx-loading [show]="loading"
+    [config]="{ backdropBorderRadius: '14px' ,fullScreenBackdrop:true,backdropBackgroundColour:'rgba(255,255,255, 0.01)',primaryColour:'#005eff',secondaryColour:'#005eff',tertiaryColour:'#005eff'}">
+  </ngx-loading>
+  <div class="row mb-2" style="justify-content: space-between;margin:0px;margin-bottom: 2rem;">
+    <h1 class="h3 page-title">CashPickup Requests</h1>
+</div>
+<div class="row mb-3">
+  <div class="col-12 col-xl-3 col-md-6">
+    <div class="form-group">
+      <input type="text" class="form-control" id="searchtext" name="searchtext"
+        placeholder="Search by text" #searchtext="ngModel" [(ngModel)]="filters.searchtext">
     </div>
-    <!-- Footer -->
-    <app-footer></app-footer>
-    <!-- End of Footer -->
+  </div>
+  <div class="col-12 col-xl-6 col-md-6">
+    <div class="form-group">
+      <div class="btn blue-btn" (click)="getSlidersWithFilters({'page':1});">
+        <div class="dib">Search</div>
+      </div>
+      <div class="btn gray-btn ml-3" (click)="filters={};getSlidersWithFilters({'page':1});">
+        <div class="dib">Reset</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-xl-3 col-md-6" style="text-align: right;">
+    <div class="form-group">
+      <div class="btn blue-btn" (click)="exportCurrent();">
+        <div class="dib">Export</div>
+      </div>
+      <div class="btn gray-btn ml-3" (click)="exportAll();">
+        <div class="dib">Export All</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+      <div class="c-table-wrapper table-responsive-small">
+        <table class="c-table">
+          <thead class="c-table-header">
+            <tr class="c-table-row c-table-row-header">
+              <th class="c-table-cell c-table-header-cell text-pull-left">
+                Name
+              </th>
+              <th class="c-table-cell c-table-header-cell text-pull-left">
+                Email
+              </th>
+              <th class="c-table-cell c-table-header-cell text-pull-left">
+                Phone
+              </th>
+              <th class="c-table-cell c-table-header-cell text-pull-left">
+                DOB
+              </th>
+              <th class="c-table-cell c-table-header-cell text-pull-left">
+                Amount
+              </th>
+              <th class="c-table-cell c-table-header-cell text-pull-left">
+                Transaction ID
+              </th>
+              <th class="c-table-cell c-table-header-cell text-pull-left">
+                User Email
+              </th>
+              <th class="c-table-cell c-table-header-cell text-pull-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="c-table-body" *ngIf="table_data && table_data.length>0">
+            <tr class="c-table-row" *ngFor="let tab_data of table_data; let i=index;">
+              <td class="c-table-cell c-table-body-cell text-pull-left">{{tab_data.name}}</td>
+              <td class="c-table-cell c-table-body-cell text-pull-left">
+                {{(tab_data.email)}}
+              </td>
+              <td class="c-table-cell c-table-body-cell text-pull-left">
+                {{(tab_data.phone != "null" ? tab_data.phone : "")}}
+              </td>
+              <td class="c-table-cell c-table-body-cell text-pull-left">
+                {{(tab_data.dob)}}
+              </td>
+              <td class="c-table-cell c-table-body-cell text-pull-left">
+                {{(tab_data.amount)}}
+              </td>
+              <td class="c-table-cell c-table-body-cell text-pull-left">
+                {{(tab_data.transaction_id)}}
+              </td>
+              <td class="c-table-cell c-table-body-cell text-pull-left">
+                {{(tab_data.useremail)}}
+              </td>
+              <td style="width: 90px;" class="c-table-cell c-table-body-cell text-pull-right">
+
+
+              </td>
+
+
+            </tr>
+          </tbody>
+          <tbody class="c-table-body" *ngIf="(!table_data || table_data.length==0)">
+            <tr class="c-table-row">
+              <td class="c-table-cell c-table-body-cell text-center" colspan="6">{{loading ? "Fetching a Data" : "No Data Available"}} </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+          <div class="share-pagination">
+              <app-shared-pagination [paginationValues]="paginationValues" (onChange)="getSlidersWithFilters($event)">
+              </app-shared-pagination>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- Footer -->
+<app-footer></app-footer>
+<!-- End of Footer -->

@@ -73,7 +73,7 @@
                 {{(tab_data.address)}}
               </td>
               <td class="c-table-cell c-table-body-cell text-pull-left">
-                {{(tab_data.phone)}}
+                {{(tab_data.phone != "null" ? tab_data.phone : "")}}
               </td>
               <td class="c-table-cell c-table-body-cell text-pull-left">
                 {{(tab_data.bank_name)}}
@@ -91,7 +91,7 @@
                 {{(tab_data.email)}}
               </td>
               <td style="width: 90px;" class="c-table-cell c-table-body-cell text-pull-right">
-                <td class="c-table-cell c-table-body-cell text-pull-left">
+
                   <div class="action-btn" *ngIf="tab_data.status == 'pending'" title="Mark As Completed" (click)="onClickStatusChange(tab_data)" style="color: #3985fc">
                       <i class="fa fa-check"></i>
                   </div>
