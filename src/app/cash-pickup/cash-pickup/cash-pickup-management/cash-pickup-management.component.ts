@@ -72,7 +72,7 @@ export class  CashPickupManagementComponent implements OnInit {
 
   exportCurrent(){
     this.loading = true;
-    let headerList = ["name","email","phone",'dob','amount','transaction_id','useremail']
+    let headerList = ["name","email","phone",'amount','transaction_id','useremail']
     this.commonHelper.downloadFile(this.table_data,"Cash Pickup Request", headerList);
     this.loading = false;
   }
@@ -87,7 +87,7 @@ export class  CashPickupManagementComponent implements OnInit {
     this.cashPickupService.exportAllCashPickupRequest(params).subscribe((res: any) => {
       if (res.status == 200 && res.data) {
 
-        let headerList = ["name","email","phone",'dob','amount','transaction_id','useremail']
+        let headerList = ["name","email","phone",'amount','transaction_id','useremail']
         this.commonHelper.downloadFile(JSON.parse(JSON.stringify(res.data)),"Cash Pickup Request All", headerList);
 
       } else if (res.status == 400) {
