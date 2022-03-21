@@ -20,7 +20,7 @@ export class SupportRequestManagementComponent implements OnInit {
   base_url = environment.url;
   public dialogType: string = "add";
   status: boolean = true
-
+  todayDate = new Date();
   public paginationValues: Subject<any> = new Subject();
   public table_data: any[] = [];
   public filters: any = {};
@@ -44,8 +44,14 @@ export class SupportRequestManagementComponent implements OnInit {
         limit: event.limit ? event.limit : this.recordLimit
       };
       this.recordLimit = params.limit;
-      if (this.filters.searchtext) {
-        params["filters"]["searchtext"] = this.filters.searchtext;
+      if(this.filters.searchtext) {
+        params["filters"]["searchtext"] = this.filters.searchtext.trim();
+      }
+      if (this.filters.from_date) {
+        params["filters"]["from_date"] = this.filters.from_date;
+      }
+      if (this.filters.to_date) {
+        params["filters"]["to_date"] = this.filters.to_date;
       }
       this.supportRequestService.getAllSupportRequest(params).subscribe((res: any) => {
         if (res.status == 200 && res.data.slides) {
@@ -82,7 +88,7 @@ export class SupportRequestManagementComponent implements OnInit {
   }
   exportCurrent(){
     this.loading = true;
-    let headerList = ["email","name","phone","status","text","title"]
+    let headerList = ["email","name","phone","status","text","title",'createdAt']
     this.table_data = this.table_data.map((m:any) => {return {...m, status: m.status == 1 ? "Resolved" : "Pending"}})
     this.commonHelper.downloadFile(this.table_data,"Support Request", headerList);
     this.loading = false;
@@ -91,14 +97,20 @@ export class SupportRequestManagementComponent implements OnInit {
     let params = {
       filters: {}
     };
-    if (this.filters.searchtext) {
-      params["filters"]["searchtext"] = this.filters.searchtext;
+    if(this.filters.searchtext) {
+      params["filters"]["searchtext"] = this.filters.searchtext.trim();
+    }
+    if (this.filters.from_date) {
+      params["filters"]["from_date"] = this.filters.from_date;
+    }
+    if (this.filters.to_date) {
+      params["filters"]["to_date"] = this.filters.to_date;
     }
     this.loading = true;
     this.supportRequestService.exportAllSupportRequest(params).subscribe((res: any) => {
       if (res.status == 200 && res.data) {
 
-        let headerList = ["email","name","phone","status","text","title"]
+        let headerList = ["email","name","phone","status","text","title",'createdAt']
         this.commonHelper.downloadFile(JSON.parse(JSON.stringify(res.data)),"Support Request All", headerList);
 
       } else if (res.status == 400) {

@@ -16,7 +16,7 @@ export class  BankTransferManagementComponent implements OnInit {
   public loading: boolean = false;
   public filters:any = {};
   public setting_Obj: any = {}
-
+  todayDate = new Date();
   base_url = environment.url;
   public dialogType: string = "add";
   status : boolean = true
@@ -45,8 +45,14 @@ export class  BankTransferManagementComponent implements OnInit {
         limit: event.limit ? event.limit : this.recordLimit
       };
       this.recordLimit = params.limit;
-        if(this.filters.searchtext) {
-        params["filters"]["searchtext"] = this.filters.searchtext;
+      if(this.filters.searchtext) {
+        params["filters"]["searchtext"] = this.filters.searchtext.trim();
+      }
+      if (this.filters.from_date) {
+        params["filters"]["from_date"] = this.filters.from_date;
+      }
+      if (this.filters.to_date) {
+        params["filters"]["to_date"] = this.filters.to_date;
       }
       this.bankTransferService.getAllBankDetails(params).subscribe((res: any) => {
         if (res.status == 200 && res.data.slides) {
@@ -87,7 +93,7 @@ export class  BankTransferManagementComponent implements OnInit {
 
   exportCurrent(){
     this.loading = true;
-    let headerList = ["address","amount","bank_account","bank_name","country","email","name","phone",'status','transaction_id']
+    let headerList = ["address","amount","bank_account","bank_name","country","email","name","phone",'status','transaction_id','createdAt']
     this.commonHelper.downloadFile(this.table_data,"Bank Transfer Request", headerList);
     this.loading = false;
   }
@@ -95,14 +101,20 @@ export class  BankTransferManagementComponent implements OnInit {
     let params = {
       filters: {}
     };
-    if (this.filters.searchtext) {
-      params["filters"]["searchtext"] = this.filters.searchtext;
+    if(this.filters.searchtext) {
+      params["filters"]["searchtext"] = this.filters.searchtext.trim();
+    }
+    if (this.filters.from_date) {
+      params["filters"]["from_date"] = this.filters.from_date;
+    }
+    if (this.filters.to_date) {
+      params["filters"]["to_date"] = this.filters.to_date;
     }
     this.loading = true;
     this.bankTransferService.exportAllBankRequest(params).subscribe((res: any) => {
       if (res.status == 200 && res.data) {
 
-        let headerList = ["address","amount","bank_account","bank_name","country","email","name","phone",'status','transaction_id']
+        let headerList = ["address","amount","bank_account","bank_name","country","email","name","phone",'status','transaction_id','createdAt']
         this.commonHelper.downloadFile(JSON.parse(JSON.stringify(res.data)),"Support Transfer Request All", headerList);
 
       } else if (res.status == 400) {

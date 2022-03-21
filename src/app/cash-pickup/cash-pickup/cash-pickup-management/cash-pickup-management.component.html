@@ -6,13 +6,24 @@
     <h1 class="h3 page-title">CashPickup Requests</h1>
 </div>
 <div class="row mb-3">
-  <div class="col-12 col-xl-3 col-md-6">
+  <div class="col-12 col-xl-2 col-md-4">
     <div class="form-group">
       <input type="text" class="form-control" id="searchtext" name="searchtext"
         placeholder="Search by text" #searchtext="ngModel" [(ngModel)]="filters.searchtext">
     </div>
   </div>
-  <div class="col-12 col-xl-6 col-md-6">
+  <div class="col-12 col-xl-2 col-md-4">
+    <div class="form-group">
+        <p-calendar #fromdate="ngModel" name="fromdate" [(ngModel)]="filters.from_date" placeholder="From Date"  dateFormat="dd-mm-yy"  showButtonBar="true" [monthNavigator]="true" [maxDate]="todayDate" [readonlyInput]="true" selectOtherMonths="true" appendTo="body"></p-calendar>
+    </div>
+  </div>
+  <div class="col-12 col-xl-2 col-md-4">
+    <div class="form-group">
+
+        <p-calendar #todate="ngModel" name="todate" [(ngModel)]="filters.to_date" placeholder="To Date"  dateFormat="dd-mm-yy"  showButtonBar="true" [monthNavigator]="true" [maxDate]="todayDate" [readonlyInput]="true" selectOtherMonths="true" appendTo="body"></p-calendar>
+    </div>
+  </div>
+  <div class="col-12 col-xl-2 col-md-4">
     <div class="form-group">
       <div class="btn blue-btn" (click)="getSlidersWithFilters({'page':1});">
         <div class="dib">Search</div>
@@ -22,7 +33,7 @@
       </div>
     </div>
   </div>
-  <div class="col-12 col-xl-3 col-md-6" style="text-align: right;">
+  <div class="col-12 col-xl-4 col-md-4 " style="text-align: right;">
     <div class="form-group">
       <div class="btn blue-btn" (click)="exportCurrent();">
         <div class="dib">Export</div>
@@ -58,6 +69,9 @@
               <th class="c-table-cell c-table-header-cell text-pull-left">
                 User Email
               </th>
+              <th class="c-table-cell c-table-header-cell text-pull-left">
+                Date
+              </th>
               <th class="c-table-cell c-table-header-cell text-pull-right">Actions</th>
             </tr>
           </thead>
@@ -79,6 +93,9 @@
               </td>
               <td class="c-table-cell c-table-body-cell text-pull-left">
                 {{(tab_data.useremail)}}
+              </td>
+              <td class="c-table-cell c-table-body-cell text-pull-left">
+                {{(tab_data.createdAt | date: 'dd-MM-yyyy')}}
               </td>
               <td style="width: 90px;" class="c-table-cell c-table-body-cell text-pull-right">
 

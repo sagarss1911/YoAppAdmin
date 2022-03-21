@@ -46,14 +46,14 @@ export class DashboardComponent implements OnInit {
             data: [this.bankTransferRequest.totalBankTransferRequestToday,this.bankTransferRequest.totalBankTransferRequestForCurrentMonth,this.bankTransferRequest.totalBankTransferRequesttillDate],
             backgroundColor: 'rgb(75, 192, 192)',
             borderWidth: 0,
-            borderRadius: 50,
+
           },{
             label: 'Pending',
             data: [this.bankTransferRequest.totalBankTransferPendingRequestToday,this.bankTransferRequest.totalBankTransferPendingRequestForCurrentMonth,this.bankTransferRequest.totalBankTransferPendingRequesttillDate],
             borderColor: '',
             backgroundColor: 'rgb(255, 99, 132)',
             borderWidth: 0,
-            borderRadius: 50,
+
           }]
         };
         this.chart = new Chart('canvas',  {
