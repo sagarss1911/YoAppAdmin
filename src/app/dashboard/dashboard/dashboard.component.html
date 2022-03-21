@@ -5,48 +5,79 @@
     [config]="{ backdropBorderRadius: '14px' ,fullScreenBackdrop:false,backdropBackgroundColour:'rgba(255,255,255, 0.01)',primaryColour:'#005eff',secondaryColour:'#005eff',tertiaryColour:'#005eff'}">
   </ngx-loading>
   <div class="row">
-    <div class="col-md-6">
-      <canvas id="canvas">{{ chart }}</canvas>
-    </div>
-    <div class="col-md-6">
-      <div class="row">
-        Bank Transfer Request
+   
+    <div class="col-md-6 ext-centert">
+      <div class=" text-center d-block pb-3">
+        
+       <p  style="background-color: #fff;">Bank Transfer Request</p> 
       </div>
       <div class="row">
         <div class="col-md-4">
-          <p>Today</p>
-          {{bankTransferRequest.totalBankTransferRequestToday}}
+          <div class="bank-box" style="background-color: #C10037; border-bottom: 2px solid #000;">
+            <p>Today</p>
+            {{bankTransferRequest.totalBankTransferRequestToday}}
+          </div>
         </div>
+
         <div class="col-md-4">
-          <p>Currnet Month</p>
+          <div class="bank-box" style="background-color: #FF5733; border-bottom: 2px solid #000;">
+            <p>Currnet Month</p>
           {{bankTransferRequest.totalBankTransferRequestForCurrentMonth}}
+          </div>
         </div>
+
         <div class="col-md-4">
-          <p>Till Date</p>
-          {{bankTransferRequest.totalBankTransferRequesttillDate}}
+          <div class="bank-box" style="background-color: #039BAA; border-bottom: 2px solid #000;">
+            <p>Till Date</p>
+            {{bankTransferRequest.totalBankTransferRequesttillDate}}
+          </div>
         </div>
+
       </div>
     </div>
-    <div class="col-md-6">
-      <div class="row">
-        Bank Transfer Completed Request
+
+    <div class="col-md-6" >
+      <div class="text-center d-block pb-3">
+      <p  style="background-color: #fff;">Bank Transfer Completed Request </p> 
       </div>
       <div class="row">
+
         <div class="col-md-4">
-          <p>Today</p>
-          {{bankTransferRequest.totalBankTransferCompletedRequestToday}}
+          <div class="bank-box" style="background-color: #FE2360; border-bottom: 2px solid #000;">
+            <p>Today</p>
+            {{bankTransferRequest.totalBankTransferCompletedRequestToday}}
+          </div>
         </div>
+
         <div class="col-md-4">
-          <p>Currnet Month</p>
-          {{bankTransferRequest.totalBankTransferCompletedRequestForCurrentMonth}}
+          <div class="bank-box" style="background-color: #57C785; border-bottom: 2px solid #000;">
+            <p>Currnet Month</p>
+            {{bankTransferRequest.totalBankTransferCompletedRequestForCurrentMonth}}
+          </div>
         </div>
-        <div class="col-md-4">
-          <p>Till Date</p>
-          {{bankTransferRequest.totalBankTransferCompletedRequesttillDate}}
+
+         <div class="col-md-4">
+          <div class="bank-box" style="background-color: #2A7B9B; border-bottom: 2px solid #000;">
+            <p>Till Date</p>
+            {{bankTransferRequest.totalBankTransferRequesttillDate}}
+          </div>
         </div>
+
+
       </div>
     </div>
   </div>
+
+  <div class="row pt-5">
+    <div class="col-md-6">
+      <canvas id="canvas">{{ chart }}</canvas>
+    </div>
+
+    <div class="col-md-6" style="background-color: #fff;">
+
+    </div>
+  </div>
+ 
   <!-- Footer -->
   <app-footer></app-footer>
   <!-- End of Footer -->

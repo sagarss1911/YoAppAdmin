@@ -63,7 +63,15 @@
 	  line-height: 1.3;
   }
 
+  .bank-box{
+    padding: 15px;
+    border-radius: 5px;
+    color: #fff;
+  }
+
+
   .row-3-block {
+
   }
 
   .graph-wrapper {
