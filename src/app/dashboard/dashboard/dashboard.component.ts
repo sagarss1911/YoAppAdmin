@@ -22,7 +22,10 @@ export class DashboardComponent implements OnInit {
     "totalBankTransferRequesttillDate": 0,
     "totalBankTransferCompletedRequestToday": 0,
     "totalBankTransferCompletedRequestForCurrentMonth": 0,
-    "totalBankTransferCompletedRequesttillDate": 0
+    "totalBankTransferCompletedRequesttillDate": 0,
+    "totalSupportRequest": 0,
+    "pendingSupportRequest": 0,
+    "completedSupportRequest": 0
 }
   public modalRef: BsModalRef;
   constructor(private authservice: AuthService,private dashboardService : DashboardService) {

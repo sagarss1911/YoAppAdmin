@@ -13,7 +13,7 @@ export class LegalService {
   constructor(private http: HttpClient) { }
   getHeader(): HttpHeaders {
     let headers = new HttpHeaders({ 'x-auth-token': (localStorage.getItem('token') || "") });
-    headers = headers.append('x-auth-api-key', "12345");
+    headers = headers.append('x-auth-api-key', environment.key);
     return headers;
   }
   addLegal(data) {
