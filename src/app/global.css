@@ -12170,14 +12170,6 @@ video {
       width: 100% !important;
     }
 
-    .bank-box-width{
-      width: 70% !important;
-    }
-
-    #canvas {
-        width: 70% !important; 
-    }
-
     .col-lg-6 {
         flex: none;
         max-width: none;
@@ -12187,6 +12179,10 @@ video {
         flex: none;
         max-width: none;
     }
+
+    .pt-1106{
+        padding-top: 3rem !important;
+      }
   }
 
   @media only screen and (max-width: 767px) {
@@ -12196,6 +12192,11 @@ video {
 
     #canvas {
         width: 100% !important; 
+    }
+
+    .col-md-4{
+        padding-right: 0rem;
+        padding-left: 0.75rem;
     }
 
   }

@@ -675,12 +675,15 @@ td:nth-child(3) {
     border-radius: 5px;
     color: #fff;
     border-bottom: 2px solid #000;
-    margin-top: 20px;
+    margin-top: 25px;
+  }
+
+  #canvas{
+    margin-top: 25px;
   }
   .bank-box p{
     min-height: 50px;
   }
-
 
  @media only screen and (min-width: 1199px) {
     .center-element .col-xl-2 {
