@@ -1194,7 +1194,7 @@ pre code {
     .col-md-6 {
         flex: 0 0 50%;
         max-width: 50%
-    }
+    } 
     .col-md-7 {
         flex: 0 0 58.33333%;
         max-width: 58.33333%
@@ -1358,10 +1358,10 @@ pre code {
         flex: 0 0 41.66667%;
         max-width: 41.66667%
     }
-    .col-lg-6 {
+     .col-lg-6 {
         flex: 0 0 50%;
         max-width: 50%
-    }
+    } 
     .col-lg-7 {
         flex: 0 0 58.33333%;
         max-width: 58.33333%
@@ -12156,3 +12156,46 @@ video {
 .white-background {
     background: white;
 }
+
+@media only screen and (max-width: 2500px) {
+    .bank-box-dashbord{
+        width: 50%;
+      }
+
+  }
+
+
+@media only screen and (max-width: 1106px) {
+    .bank-box-dashbord{
+      width: 100% !important;
+    }
+
+    .bank-box-width{
+      width: 70% !important;
+    }
+
+    #canvas {
+        width: 70% !important; 
+    }
+
+    .col-lg-6 {
+        flex: none;
+        max-width: none;
+    }
+
+    .col-md-6 {
+        flex: none;
+        max-width: none;
+    }
+  }
+
+  @media only screen and (max-width: 767px) {
+    .bank-box-width{
+      width: 100% !important;
+    }
+
+    #canvas {
+        width: 100% !important; 
+    }
+
+  }
