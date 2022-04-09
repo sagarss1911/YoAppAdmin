@@ -1,0 +1,45 @@
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' ,fullScreenBackdrop:false,backdropBackgroundColour:'rgba(255,255,255, 0.01)',primaryColour:'#005eff',secondaryColour:'#005eff',tertiaryColour:'#005eff'}">
+</ngx-loading>
+
+<div class="modal-header custom-modal-header">
+    <div style="font-size: 20px;">
+        {{dialogType == 'update' ? 'Update Permission' : 'Add Permission'}}
+    </div>
+    <div class="modal-header-close-btn" (click)="onClose()">
+        x
+    </div>
+</div>
+
+<div class="modal-body custom-modal-body" *ngIf="permission_Obj.name">
+    <form #f="ngForm" novalidate autocomplete="off">
+        <div class="row">
+            <div class="col-12 ">
+                <div class="form-group">
+                    <label>Permission <span class="c-red">*</span></label>
+                    <input type="text" class="form-control" id="name" placeholder="Enter Permission Name" [(ngModel)]="permission_Obj.name" name="name" #name="ngModel" required />
+                    <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
+                        <p>Permission can't be blank.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="productname">Permission Url <span class="c-red">*</span></label>
+                    <p-multiSelect #url="ngModel" id="url" name="url" [options]="permission_url_list"
+                        optionValue="value" optionLabel="name" placeholder="Select Permission Url"
+                        defaultLabel="Select Related Projets" [(ngModel)]="permission_Obj.url"
+                        [ngModelOptions]="{standalone: true}">
+                    </p-multiSelect>
+                </div>
+            </div>
+        </div>
+        <div class="footer-block  mb-2 mt-4">
+            <button type="submit" *ngIf="dialogType == 'add'" class="btn green-btn" [disabled]="f.invalid || !permission_Obj.name || !permission_Obj.url" (click)="addSupportCategory()">Add</button>
+            <button type="submit" *ngIf="dialogType == 'update'" class="btn green-btn" [disabled]="f.invalid || !permission_Obj.name || !permission_Obj.url" (click)="updateSupportCategory()">Update
+        </button>
+            <button type="button" class="btn gray-btn" (click)="onClose()">Cancel</button>
+        </div>
+    </form>
+</div>

@@ -21,9 +21,8 @@ const routes: Routes = [
       { path: 'cash-pickup', loadChildren: () => import('src/app/cash-pickup/cash-pickup.module').then(m => m.CashPickupModule) },
       { path: 'merchant', loadChildren: () => import('src/app/merchant/merchant.module').then(m => m.MerchantModule) },
       { path: 'merchant-limit', loadChildren: () => import('src/app/merchant-limit/merchant-limit.module').then(m => m.MerchantLimitModule) },
-
-
-      ]
+      { path: 'permission', loadChildren: () => import('src/app/permission/permission.module').then(m => m.PermissionModule) }
+    ]
   },
   { path: '**', component: NotfoundComponent }
 ]
