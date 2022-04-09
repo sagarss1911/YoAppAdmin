@@ -632,7 +632,15 @@ pre code {
     margin-right: auto;
     margin-left: auto;
 }
+.add-update-room-path-modal  {
+  max-width: 32rem;
+}
 
+.add-update-room-path-modal .modal-content {
+  padding: 0px 28px;
+  border-radius: 20px;
+  padding-bottom: 25px;
+}
 @media (min-width:576px) {
     .container,
     .container-sm {
@@ -1194,7 +1202,7 @@ pre code {
     .col-md-6 {
         flex: 0 0 50%;
         max-width: 50%
-    } 
+    }
     .col-md-7 {
         flex: 0 0 58.33333%;
         max-width: 58.33333%
@@ -1361,7 +1369,7 @@ pre code {
      .col-lg-6 {
         flex: 0 0 50%;
         max-width: 50%
-    } 
+    }
     .col-lg-7 {
         flex: 0 0 58.33333%;
         max-width: 58.33333%
@@ -12191,7 +12199,7 @@ video {
     }
 
     #canvas {
-        width: 100% !important; 
+        width: 100% !important;
     }
 
     .col-md-4{

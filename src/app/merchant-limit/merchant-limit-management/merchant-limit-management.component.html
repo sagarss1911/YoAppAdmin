@@ -1,0 +1,84 @@
+<div class="container-fluid management-tab">
+  <ngx-loading [show]="loading"
+    [config]="{ backdropBorderRadius: '14px' ,fullScreenBackdrop:false,backdropBackgroundColour:'rgba(255,255,255, 0.01)',primaryColour:'#005eff',secondaryColour:'#005eff',tertiaryColour:'#005eff'}">
+  </ngx-loading>
+  <div class="row mb-2" style="justify-content: space-between;margin:0px;margin-bottom: 2rem;">
+    <h1 class="h3 page-title">Legal</h1>
+  </div>
+
+  <div class="row" *ngIf="!editformdata && setting_Obj">
+    <div class="col-12">
+      <div class="c-table-wrapper table-responsive-small">
+        <div class="availabledata">
+          <table class="c-table">
+            <thead class="c-table-header">
+              <tr class="c-table-row c-table-row-header">
+
+              </tr>
+            </thead>
+            <tbody class="c-table-body">
+              <tr class="c-table-row">
+                <td style="vertical-align: top;padding-top: 10px;"
+                  class="c-table-cell c-table-body-cell text-pull-left">
+                  Merchant Cashpickup
+                </td>
+                <td class="c-table-cell c-table-body-cell text-pull-left">
+                  <div>{{setting_Obj.merchant_cashpickup}}</div>
+                </td>
+              </tr>
+              <tr class="c-table-row">
+                <td style="vertical-align: top;padding-top: 10px;"
+                  class="c-table-cell c-table-body-cell text-pull-left">
+                  Merchant Cash Topup
+                </td>
+                <td class="c-table-cell c-table-body-cell text-pull-left">
+                  <div>{{setting_Obj.merchant_cashtopup}}</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="footer-block  mb-2 mt-4">
+            <button type="submit" class="btn green-btn" (click)="editformdata=true">Edit</button>
+            <button type="button" class="btn gray-btn" *ngIf="editformdata">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal-body custom-modal-body" *ngIf="editformdata">
+    <form #f="ngForm" novalidate autocomplete="off">
+      <div class="row">
+        <div class="col-12 ">
+          <div class="form-group">
+            <label>Merchant Cashpickup</label>
+            <input type="number" class="form-control" id="merchant_cashpickup" name="merchant_cashpickup" placeholder="Enter Cash Pickup" #merchant_cashpickup="ngModel"
+              [(ngModel)]="setting_Obj.merchant_cashpickup" required />
+            <div class="alert alert-danger" *ngIf="merchant_cashpickup.touched && merchant_cashpickup.invalid">
+              <p>Cash Pickup can't be blank.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 ">
+          <div class="form-group">
+            <label>Merchant Cash Topup</label>
+            <input type="number" class="form-control" id="merchant_cashtopup" name="merchant_cashtopup" placeholder="Enter Cash Topup" #merchant_cashtopup="ngModel"
+              [(ngModel)]="setting_Obj.merchant_cashtopup" required />
+            <div class="alert alert-danger" *ngIf="merchant_cashtopup.touched && merchant_cashtopup.invalid">
+              <p>Cash Topup can't be blank.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-block  mb-2 mt-4">
+        <button type="submit" class="btn green-btn" [disabled]="f.invalid || !setting_Obj.merchant_cashtopup || !setting_Obj.merchant_cashpickup " (click)="addTermCondition()">Update</button>
+        <button type="button" class="btn gray-btn ml-4" (click)="editformdata=false">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Footer -->
+<app-footer></app-footer>
+<!-- End of Footer -->

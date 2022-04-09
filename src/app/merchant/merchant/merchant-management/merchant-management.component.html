@@ -1,0 +1,145 @@
+<div class="container-fluid management-tab">
+  <ngx-loading [show]="loading"
+    [config]="{ backdropBorderRadius: '14px' ,fullScreenBackdrop:true,backdropBackgroundColour:'rgba(255,255,255, 0.01)',primaryColour:'#005eff',secondaryColour:'#005eff',tertiaryColour:'#005eff'}">
+  </ngx-loading>
+  <div class="row mb-2" style="justify-content: space-between;margin:0px;margin-bottom: 2rem;">
+    <h1 class="h3 page-title">Merchant</h1>
+</div>
+<div class="row mb-3">
+  <div class="col-12 col-xl-2 col-md-4">
+    <div class="form-group">
+      <input type="text" class="form-control" id="searchtext" name="searchtext"
+        placeholder="Search by text" #searchtext="ngModel" [(ngModel)]="filters.searchtext">
+    </div>
+  </div>
+  <div class="col-12 col-xl-2 col-md-4">
+    <div class="form-group">
+        <p-calendar #fromdate="ngModel" name="fromdate" [(ngModel)]="filters.from_date" placeholder="From Date"  dateFormat="dd-mm-yy"  showButtonBar="true" [monthNavigator]="true" [maxDate]="todayDate" [readonlyInput]="true" selectOtherMonths="true" appendTo="body"></p-calendar>
+    </div>
+  </div>
+  <div class="col-12 col-xl-2 col-md-4">
+    <div class="form-group">
+
+        <p-calendar #todate="ngModel" name="todate" [(ngModel)]="filters.to_date" placeholder="To Date"  dateFormat="dd-mm-yy"  showButtonBar="true" [monthNavigator]="true" [maxDate]="todayDate" [readonlyInput]="true" selectOtherMonths="true" appendTo="body"></p-calendar>
+    </div>
+  </div>
+  <div class="col-12 col-xl-2 col-md-4">
+    <div class="form-group">
+      <div class="btn blue-btn" (click)="getSlidersWithFilters({'page':1});">
+        <div class="dib">Search</div>
+      </div>
+      <div class="btn gray-btn ml-3" (click)="filters={};getSlidersWithFilters({'page':1});">
+        <div class="dib">Reset</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-xl-4 col-md-4 " style="text-align: right;">
+    <div class="form-group">
+      <div class="btn blue-btn" (click)="exportCurrent();">
+        <div class="dib">Export</div>
+      </div>
+      <div class="btn gray-btn ml-3" (click)="exportAll();">
+        <div class="dib">Export All</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+      <div class="c-table-wrapper table-responsive-small">
+        <table class="c-table">
+          <thead class="c-table-header">
+            <tr class="c-table-row c-table-row-header">
+              <th class="c-table-cell c-table-header-cell text-pull-left">
+                Name
+              </th>
+              <th class="c-table-cell c-table-header-cell text-pull-left">
+                Address
+              </th>
+              <th class="c-table-cell c-table-header-cell text-pull-left">
+                Phone
+              </th>
+              <th class="c-table-cell c-table-header-cell text-pull-left">
+                Licence
+              </th>
+              <th class="c-table-cell c-table-header-cell text-pull-left">
+                Address
+              </th>
+              <th class="c-table-cell c-table-header-cell text-pull-left">
+                Utility
+              </th>
+              <th class="c-table-cell c-table-header-cell text-pull-left">
+                Date
+              </th>
+              <th class="c-table-cell c-table-header-cell text-pull-right">Verification</th>
+              <th class="c-table-cell c-table-header-cell text-pull-right">Login Enabled</th>
+              <th class="c-table-cell c-table-header-cell text-pull-right">Action</th>
+            </tr>
+          </thead>
+          <tbody class="c-table-body" *ngIf="table_data && table_data.length>0">
+            <tr class="c-table-row" *ngFor="let tab_data of table_data; let i=index;">
+              <td class="c-table-cell c-table-body-cell text-pull-left">{{tab_data.merchant_name}}</td>
+              <td class="c-table-cell c-table-body-cell text-pull-left">
+                {{(tab_data.merchant_address)}}
+              </td>
+              <td class="c-table-cell c-table-body-cell text-pull-left">
+                {{tab_data.merchant_phone}}
+              </td>
+              <td class="c-table-cell c-table-body-cell text-pull-left">
+                <img src="{{tab_data.licence_proof}}" alt="address" style="width:100px;">
+              </td>
+              <td class="c-table-cell c-table-body-cell text-pull-left">
+                <img src="{{tab_data.address_proof}}" alt="address" style="width:100px;">
+              </td>
+              <td class="c-table-cell c-table-body-cell text-pull-left">
+                <img src="{{tab_data.utility_proof}}" alt="address" style="width:100px;">
+              </td>
+
+              <td class="c-table-cell c-table-body-cell text-pull-left">
+                {{(tab_data.merchantCreatedAt | date: 'dd-MM-yyyy')}}
+              </td>
+              <td style="width: 90px;" class="c-table-cell c-table-body-cell text-pull-right">
+
+                  <div class="action-btn" *ngIf="tab_data.isMerchantVerified == 0 " title="Mark As Verified" (click)="onClickStatusChange(tab_data,'isMerchantVerified')" style="color: #3985fc">
+                      <i class="fa fa-check"></i>
+                  </div>
+                  <div class="action-btn" *ngIf="tab_data.isMerchantVerified == 1" title="Mark As Un-Verified" (click)="onClickStatusChange(tab_data,'isMerchantVerified')" style="color: #ff5151">
+                      <i class="fa fa-times"></i>
+                  </div>
+              </td>
+              <td style="width: 90px;" class="c-table-cell c-table-body-cell text-pull-right">
+
+                <div class="action-btn" *ngIf="tab_data.isMerchantEnabled == 0 " title="Mark As Enabled" (click)="onClickStatusChange(tab_data,'isMerchantEnabled')" style="color: #3985fc">
+                    <i class="fa fa-check"></i>
+                </div>
+                <div class="action-btn" *ngIf="tab_data.isMerchantEnabled == 1" title="Mark As Disabled" (click)="onClickStatusChange(tab_data,'isMerchantEnabled')" style="color: #ff5151">
+                    <i class="fa fa-times"></i>
+                </div>
+            </td>
+
+            <td class="c-table-cell c-table-body-cell text-pull-right">
+              <div class="action-btn" title="Edit Slider" (click)="onClickEditSlider(tab_data)"
+                style="color: #3985fc">
+                <i class="fa fa-edit"></i>
+              </div>
+            </td>
+            </tr>
+          </tbody>
+          <tbody class="c-table-body" *ngIf="(!table_data || table_data.length==0)">
+            <tr class="c-table-row">
+              <td class="c-table-cell c-table-body-cell text-center" colspan="6">{{loading ? "Fetching a Data" : "No Data Available"}} </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+          <div class="share-pagination">
+              <app-shared-pagination [paginationValues]="paginationValues" (onChange)="getSlidersWithFilters($event)">
+              </app-shared-pagination>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- Footer -->
+<app-footer></app-footer>
+<!-- End of Footer -->

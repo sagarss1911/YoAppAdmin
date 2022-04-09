@@ -19,6 +19,9 @@ const routes: Routes = [
       { path: 'support-request', loadChildren: () => import('src/app/support-request/support-request.module').then(m => m.SupportRequestModule) },
       { path: 'bank-transfer', loadChildren: () => import('src/app/bank-transfer/bank-transfer.module').then(m => m.BankTransferModule) },
       { path: 'cash-pickup', loadChildren: () => import('src/app/cash-pickup/cash-pickup.module').then(m => m.CashPickupModule) },
+      { path: 'merchant', loadChildren: () => import('src/app/merchant/merchant.module').then(m => m.MerchantModule) },
+      { path: 'merchant-limit', loadChildren: () => import('src/app/merchant-limit/merchant-limit.module').then(m => m.MerchantLimitModule) },
+
 
       ]
   },
