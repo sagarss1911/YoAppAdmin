@@ -69,10 +69,27 @@
                 Utility
               </th>
               <th class="c-table-cell c-table-header-cell text-pull-left">
+                Upgraded Image1
+              </th>
+              <th class="c-table-cell c-table-header-cell text-pull-left">
+                Upgraded Image2
+              </th>
+              <th class="c-table-cell c-table-header-cell text-pull-left">
+                Upgraded Image3
+              </th>
+              <th class="c-table-cell c-table-header-cell text-pull-left">
+                Upgraded Image4
+              </th>
+              <th class="c-table-cell c-table-header-cell text-pull-left">
+                Current Plan
+              </th>
+              <th class="c-table-cell c-table-header-cell text-pull-left">
                 Date
               </th>
               <th class="c-table-cell c-table-header-cell text-pull-right">Verification</th>
               <th class="c-table-cell c-table-header-cell text-pull-right">Login Enabled</th>
+              <th class="c-table-cell c-table-header-cell text-pull-right">Merchant Upgrade Request</th>
+              <th class="c-table-cell c-table-header-cell text-pull-right">Merchant Upgraded</th>
               <th class="c-table-cell c-table-header-cell text-pull-right">Action</th>
             </tr>
           </thead>
@@ -86,20 +103,34 @@
                 {{tab_data.merchant_phone}}
               </td>
               <td class="c-table-cell c-table-body-cell text-pull-left">
-                <img src="{{tab_data.licence_proof}}" alt="address" style="width:100px;">
+                <img src="{{tab_data.licence_proof}}" alt="Licence PRoof" style="width:100px;">
               </td>
               <td class="c-table-cell c-table-body-cell text-pull-left">
-                <img src="{{tab_data.address_proof}}" alt="address" style="width:100px;">
+                <img src="{{tab_data.address_proof}}" alt="Address Proof" style="width:100px;">
               </td>
               <td class="c-table-cell c-table-body-cell text-pull-left">
-                <img src="{{tab_data.utility_proof}}" alt="address" style="width:100px;">
+                <img src="{{tab_data.utility_proof}}" alt="Utility Proof" style="width:100px;">
+              </td>
+              <td class="c-table-cell c-table-body-cell text-pull-left">
+                <img *ngIf="tab_data.upgraded_image1" src="{{tab_data.upgraded_image1}}" alt="upgraded_image1" style="width:100px;">
+              </td>
+              <td class="c-table-cell c-table-body-cell text-pull-left">
+                <img *ngIf="tab_data.upgraded_image2" src="{{tab_data.upgraded_image2}}" alt="upgraded_image2" style="width:100px;">
+              </td>
+              <td class="c-table-cell c-table-body-cell text-pull-left">
+                <img *ngIf="tab_data.upgraded_image3" src="{{tab_data.upgraded_image3}}" alt="upgraded_image3" style="width:100px;">
+              </td>
+              <td class="c-table-cell c-table-body-cell text-pull-left">
+                <img *ngIf="tab_data.upgraded_image4" src="{{tab_data.upgraded_image4}}" alt="upgraded_image4" style="width:100px;">
+              </td>
+              <td class="c-table-cell c-table-body-cell text-pull-left">
+                {{tab_data.planname}}
               </td>
 
               <td class="c-table-cell c-table-body-cell text-pull-left">
                 {{(tab_data.merchantCreatedAt | date: 'dd-MM-yyyy')}}
               </td>
               <td style="width: 90px;" class="c-table-cell c-table-body-cell text-pull-right">
-
                   <div class="action-btn" *ngIf="tab_data.isMerchantVerified == 0 " title="Mark As Verified" (click)="onClickStatusChange(tab_data,'isMerchantVerified')" style="color: #3985fc">
                       <i class="fa fa-check"></i>
                   </div>
@@ -115,7 +146,25 @@
                 <div class="action-btn" *ngIf="tab_data.isMerchantEnabled == 1" title="Mark As Disabled" (click)="onClickStatusChange(tab_data,'isMerchantEnabled')" style="color: #ff5151">
                     <i class="fa fa-times"></i>
                 </div>
-            </td>
+              </td>
+              <td style="width: 90px;" class="c-table-cell c-table-body-cell text-pull-right">
+
+                <div class="action-btn" *ngIf="tab_data.isUpgradeRequestSubmitted == 0 " style="color: #3985fc">
+                    <i class="fa fa-check"></i>
+                </div>
+                <div class="action-btn" *ngIf="tab_data.isUpgradeRequestSubmitted == 1" style="color: #ff5151">
+                    <i class="fa fa-times"></i>
+                </div>
+              </td>
+              <td style="width: 90px;" class="c-table-cell c-table-body-cell text-pull-right">
+
+                <div class="action-btn" *ngIf="tab_data.isMerchantUpgraded == 0 " title="Mark As Upgraded" (click)="onClickStatusChange(tab_data,'isMerchantUpgraded')" style="color: #3985fc">
+                    <i class="fa fa-check"></i>
+                </div>
+                <div class="action-btn" *ngIf="tab_data.isMerchantUpgraded == 1" title="Mark As Not-Upgraded" (click)="onClickStatusChange(tab_data,'isMerchantUpgraded')" style="color: #ff5151">
+                    <i class="fa fa-times"></i>
+                </div>
+              </td>
 
             <td class="c-table-cell c-table-body-cell text-pull-right">
               <div class="action-btn" title="Edit Slider" (click)="onClickEditSlider(tab_data)"

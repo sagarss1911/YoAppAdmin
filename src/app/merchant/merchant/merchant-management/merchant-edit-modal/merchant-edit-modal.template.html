@@ -100,6 +100,7 @@
           </button>
         </div>
       </div>
+
       <div class="col-12 ">
         <div class="form-group">
           <div>
@@ -127,12 +128,21 @@
           </button>
         </div>
       </div>
+      <div class="col-12 ">
+        <div class="form-group">
+          <div>
+            <label>Plan</label>
+          </div>
+
+          <p-dropdown  [options]="planList" placeholder="Select Plan" [(ngModel)]="slider_obj.membershipId" name="membershipId" optionLabel="planname" optionValue="id"></p-dropdown>
+        </div>
+      </div>
     </div>
 
     <div class="footer-block  mb-2 mt-4">
 
       <button type="submit" *ngIf="dialogType == 'update'" class="btn green-btn" [disabled]="f.invalid"
-        (click)="updateSlider()">Update Room</button>
+        (click)="updateSlider()">Update</button>
       <button type="button" class="btn gray-btn" (click)="onClose()">Cancel</button>
     </div>
   </form>

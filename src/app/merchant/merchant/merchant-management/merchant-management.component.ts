@@ -86,6 +86,9 @@ export class  MerchantManagementComponent implements OnInit {
     }else if(field == "isMerchantVerified"){
       newData.status = data.isMerchantVerified == 0 ? 1 : 0;
     }
+    else if(field == "isMerchantUpgraded"){
+      newData.status = data.isMerchantUpgraded == 0 ? 1 : 0;
+    }
 
     this.merchantService.updateStatusMerchant(data.id,newData).subscribe((res: any) => {
       if (res.status == 200) {
@@ -94,6 +97,8 @@ export class  MerchantManagementComponent implements OnInit {
 
         }else if(field == "isMerchantVerified"){
           data.isMerchantVerified = newData.status;
+        }else if(field == "isMerchantUpgraded"){
+          data.isMerchantUpgraded = newData.status;
         }
 
         this._toastMessageService.alert("success","Status Updated Successfully");
@@ -119,7 +124,6 @@ export class  MerchantManagementComponent implements OnInit {
     var tempSubObj: Subscription = this.modalRef.content.onHide.subscribe(() => {
       if (this.modalRef.content.decision === 'done') {
          if (this.dialogType == "update") {
-
           for (var i = 0, fLen = this.table_data.length; i < fLen; i++) {
             if (this.table_data[i].id == this.modalRef.content.dialogResult.id) {
               this.table_data[i] = this.modalRef.content.dialogResult;
@@ -134,7 +138,7 @@ export class  MerchantManagementComponent implements OnInit {
   }
   exportCurrent(){
     this.loading = true;
-    let headerList = ["merchant_name","merchant_phone","merchant_address","licence_proof","address_proof","utility_proof","merchantCreatedAt"]
+    let headerList = ["merchant_name","merchant_phone","merchant_address","licence_proof","address_proof","utility_proof","merchantCreatedAt","planname"]
     this.commonHelper.downloadFile(this.table_data,"Merchant Request", headerList);
     this.loading = false;
   }
@@ -154,7 +158,7 @@ export class  MerchantManagementComponent implements OnInit {
     this.loading = true;
     this.merchantService.exportAllMerchant(params).subscribe((res: any) => {
       if (res.status == 200 && res.data) {
-        let headerList = ["merchant_name","merchant_phone","merchant_address","licence_proof","address_proof","utility_proof","merchantCreatedAt"]
+        let headerList = ["merchant_name","merchant_phone","merchant_address","licence_proof","address_proof","utility_proof","merchantCreatedAt","planname"]
 
 
         this.commonHelper.downloadFile(JSON.parse(JSON.stringify(res.data)),"Merchant Request All", headerList);

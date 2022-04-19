@@ -1,0 +1,111 @@
+<div class="container-fluid management-tab">
+  <ngx-loading [show]="loading"
+    [config]="{ backdropBorderRadius: '14px' ,fullScreenBackdrop:true,backdropBackgroundColour:'rgba(255,255,255, 0.01)',primaryColour:'#005eff',secondaryColour:'#005eff',tertiaryColour:'#005eff'}">
+  </ngx-loading>
+  <div class="row mb-2" style="justify-content: space-between;margin:0px;margin-bottom: 2rem;">
+    <h1 class="h3 page-title">Plans</h1>
+    <div>
+        <div class="btn green-btn" (click)="onClickAddSlider();">
+            <span class="dib mr-2"><i class="fas fa-plus"></i></span>
+            <div class="dib">Add</div>
+        </div>
+    </div>
+</div>
+<div class="row mb-3">
+  <div class="col-12 col-xl-2 col-md-4">
+    <div class="form-group">
+      <input type="text" class="form-control" id="searchtext" name="searchtext"
+        placeholder="Search by text" #searchtext="ngModel" [(ngModel)]="filters.searchtext">
+    </div>
+  </div>
+
+
+  <div class="col-12 col-xl-2 col-md-4">
+    <div class="form-group">
+      <div class="btn blue-btn" (click)="getSlidersWithFilters({'page':1});">
+        <div class="dib">Search</div>
+      </div>
+      <div class="btn gray-btn ml-3" (click)="filters={};getSlidersWithFilters({'page':1});">
+        <div class="dib">Reset</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="row">
+  <div class="col-12">
+      <div class="c-table-wrapper table-responsive-small">
+        <table class="c-table">
+          <thead class="c-table-header">
+            <tr class="c-table-row c-table-row-header">
+              <th class="c-table-cell c-table-header-cell text-pull-left">
+                Name
+              </th>
+              <th class="c-table-cell c-table-header-cell text-pull-left">
+                Image
+              </th>
+              <th class="c-table-cell c-table-header-cell text-pull-left">
+                Cashpickup Limit
+              </th>
+              <th class="c-table-cell c-table-header-cell text-pull-left">
+                Cash Topup Limit
+              </th>
+              <th class="c-table-cell c-table-header-cell text-pull-left">
+                isDefault
+              </th>
+              <th class="c-table-cell c-table-header-cell text-pull-left">
+                Mark as Default
+              </th>
+              <th class="c-table-cell c-table-header-cell text-pull-right">Action</th>
+            </tr>
+          </thead>
+          <tbody class="c-table-body" *ngIf="table_data && table_data.length>0">
+            <tr class="c-table-row" *ngFor="let tab_data of table_data; let i=index;">
+              <td class="c-table-cell c-table-body-cell text-pull-left">{{tab_data.planname}}</td>
+              <td class="c-table-cell c-table-body-cell text-pull-left">
+                <img src="{{tab_data.image}}" alt="image" style="width:100px;">
+              </td>
+
+
+              <td class="c-table-cell c-table-body-cell text-pull-left">
+                {{(tab_data.cash_pickup_limit)}}
+              </td>
+              <td class="c-table-cell c-table-body-cell text-pull-left">
+                {{(tab_data.cash_topup_limit)}}
+              </td>
+              <td class="c-table-cell c-table-body-cell text-pull-left">
+                {{(tab_data.isDefault ? 'Yes' : 'No')}}
+              </td>
+
+              <td style="width: 90px;" class="c-table-cell c-table-body-cell text-pull-right">
+                  <div class="action-btn" *ngIf="tab_data.isDefault == 0 " title="Mark As isDefault" (click)="onClickStatusChange(tab_data)" style="color: #3985fc">
+                      <i class="fa fa-check"></i>
+                  </div>
+              </td>
+
+            <td class="c-table-cell c-table-body-cell text-pull-right">
+              <div class="action-btn" title="Edit Slider" (click)="onClickEditSlider(tab_data)"
+                style="color: #3985fc">
+                <i class="fa fa-edit"></i>
+              </div>
+            </td>
+            </tr>
+          </tbody>
+          <tbody class="c-table-body" *ngIf="(!table_data || table_data.length==0)">
+            <tr class="c-table-row">
+              <td class="c-table-cell c-table-body-cell text-center" colspan="6">{{loading ? "Fetching a Data" : "No Data Available"}} </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+          <div class="share-pagination">
+              <app-shared-pagination [paginationValues]="paginationValues" (onChange)="getSlidersWithFilters($event)">
+              </app-shared-pagination>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- Footer -->
+<app-footer></app-footer>
+<!-- End of Footer -->

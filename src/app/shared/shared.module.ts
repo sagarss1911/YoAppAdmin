@@ -4,6 +4,7 @@ import {FileUploadModule} from 'primeng/fileupload';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {FormsModule} from '@angular/forms';
 import {InputTextModule} from 'primeng/inputtext';
+import { DropdownModule } from 'primeng/dropdown';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {ButtonModule} from 'primeng/button';
 import {FieldsetModule} from 'primeng/fieldset';
@@ -36,6 +37,7 @@ import {FooterModule} from '../shared-components/footer/footer.module';
         InputSwitchModule,
         GoogleChartsModule,
         RadioButtonModule,
+        DropdownModule,
         TableModule,
         DialogModule,
         TabViewModule,

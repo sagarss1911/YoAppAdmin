@@ -6,6 +6,7 @@ import { CommonHelper } from 'src/app/helpers/common.helper';
 import { DomSanitizer } from '@angular/platform-browser';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MerchantService } from 'src/app/services/merchant.service';
+import { PlansService } from 'src/app/services/plans.service';
 import { environment } from "src/environments/environment";
 @Component({
   selector: 'update-merchant-modal',
@@ -24,6 +25,7 @@ export class UpdateMerchantModalComponent extends BaseModalComponent implements 
   product_options_list = []
   collection_data = []
   dialogResult: any;
+  planList = []
   newLicenceImageUploaded: boolean = false;
   newAddressImageUploaded: boolean = false;
   newUtilityImageUploaded: boolean = false;
@@ -31,10 +33,11 @@ export class UpdateMerchantModalComponent extends BaseModalComponent implements 
   @ViewChild('address_proof_File') address_proof_File: any;
   @ViewChild('utility_proof_File') utility_proof_File: any;
   constructor(public modalRef: BsModalRef, private _toastMessageService: ToastMessageService,
-    private commonHelper: CommonHelper,  private merchantService: MerchantService, private modalService: BsModalService,private sanitizer: DomSanitizer) { super(modalRef); }
+    private commonHelper: CommonHelper, private plansService: PlansService,  private merchantService: MerchantService, private modalService: BsModalService,private sanitizer: DomSanitizer) { super(modalRef); }
 
   ngOnInit() {
 
+this.getPlans()
   }
 
   onClose() {
@@ -47,7 +50,18 @@ export class UpdateMerchantModalComponent extends BaseModalComponent implements 
     this.close(true);
   }
 
-
+  getPlans() {
+    this.loading = true;
+    this.plansService.getAllPlansForDropdown().subscribe((res: any) => {
+      this.loading = false;
+      if (res.status == 200 && res.data) {
+        this.planList = res.data;
+      }
+    }, (error) => {
+      this.loading = false;
+      this.commonHelper.showError(error);
+    })
+  }
 
 
   updateSlider(){
@@ -65,7 +79,8 @@ export class UpdateMerchantModalComponent extends BaseModalComponent implements 
     let params = {
       merchant_name: this.slider_obj.merchant_name,
       merchant_address: this.slider_obj.merchant_address,
-      merchant_phone: this.slider_obj.merchant_phone
+      merchant_phone: this.slider_obj.merchant_phone,
+      membershipId: this.slider_obj.membershipId
     }
     data.append('body', JSON.stringify(params));
     this.loading = true;
