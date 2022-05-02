@@ -21,7 +21,9 @@ const routes: Routes = [
       { path: 'cash-pickup', loadChildren: () => import('src/app/cash-pickup/cash-pickup.module').then(m => m.CashPickupModule) },
       { path: 'merchant', loadChildren: () => import('src/app/merchant/merchant.module').then(m => m.MerchantModule) },
       { path: 'plans', loadChildren: () => import('src/app/plans/plans/plans.module').then(m => m.PlansModule) },
-      { path: 'permission', loadChildren: () => import('src/app/permission/permission.module').then(m => m.PermissionModule) }
+      { path: 'permission', loadChildren: () => import('src/app/permission/permission.module').then(m => m.PermissionModule) },
+      { path: 'bank-transfer-merchant', loadChildren: () => import('src/app/bank-transfer-merchant/bank-transfer-merchant.module').then(m => m.BankTransferMerchantModule) },
+      { path: 'cash-pickup-merchant', loadChildren: () => import('src/app/cash-pickup-merchant/cash-pickup-merchant.module').then(m => m.CashPickupMerchantModule) }
     ]
   },
   { path: '**', component: NotfoundComponent }

@@ -103,25 +103,25 @@
                 {{tab_data.merchant_phone}}
               </td>
               <td class="c-table-cell c-table-body-cell text-pull-left">
-                <img src="{{tab_data.licence_proof}}" alt="Licence PRoof" style="width:100px;">
+                <a *ngIf="tab_data.licence_proof" target="_blank" href="{{tab_data.licence_proof}}" ><img src="{{tab_data.licence_proof}}" alt="Licence PRoof" style="width:100px;"></a>
               </td>
               <td class="c-table-cell c-table-body-cell text-pull-left">
-                <img src="{{tab_data.address_proof}}" alt="Address Proof" style="width:100px;">
+                <a *ngIf="tab_data.address_proof" target="_blank" href="{{tab_data.address_proof}}" ><img src="{{tab_data.address_proof}}" alt="Address Proof" style="width:100px;"></a>
               </td>
               <td class="c-table-cell c-table-body-cell text-pull-left">
-                <img src="{{tab_data.utility_proof}}" alt="Utility Proof" style="width:100px;">
+                <a *ngIf="tab_data.utility_proof" target="_blank" href="{{tab_data.utility_proof}}" ><img src="{{tab_data.utility_proof}}" alt="Utility Proof" style="width:100px;"></a>
               </td>
               <td class="c-table-cell c-table-body-cell text-pull-left">
-                <img *ngIf="tab_data.upgraded_image1" src="{{tab_data.upgraded_image1}}" alt="upgraded_image1" style="width:100px;">
+                <a *ngIf="tab_data.upgraded_image1" target="_blank" href="{{tab_data.upgraded_image1}}" ><img *ngIf="tab_data.upgraded_image1" src="{{tab_data.upgraded_image1}}" alt="upgraded_image1" style="width:100px;"></a>
               </td>
               <td class="c-table-cell c-table-body-cell text-pull-left">
-                <img *ngIf="tab_data.upgraded_image2" src="{{tab_data.upgraded_image2}}" alt="upgraded_image2" style="width:100px;">
+                <a *ngIf="tab_data.upgraded_image2" target="_blank" href="{{tab_data.upgraded_image2}}" ><img *ngIf="tab_data.upgraded_image2" src="{{tab_data.upgraded_image2}}" alt="upgraded_image2" style="width:100px;"></a>
               </td>
               <td class="c-table-cell c-table-body-cell text-pull-left">
-                <img *ngIf="tab_data.upgraded_image3" src="{{tab_data.upgraded_image3}}" alt="upgraded_image3" style="width:100px;">
+                <a *ngIf="tab_data.upgraded_image3" target="_blank" href="{{tab_data.upgraded_image3}}" ><img *ngIf="tab_data.upgraded_image3" src="{{tab_data.upgraded_image3}}" alt="upgraded_image3" style="width:100px;"></a>
               </td>
               <td class="c-table-cell c-table-body-cell text-pull-left">
-                <img *ngIf="tab_data.upgraded_image4" src="{{tab_data.upgraded_image4}}" alt="upgraded_image4" style="width:100px;">
+                <a *ngIf="tab_data.upgraded_image4" target="_blank" href="{{tab_data.upgraded_image4}}" ><img *ngIf="tab_data.upgraded_image4" src="{{tab_data.upgraded_image4}}" alt="upgraded_image4" style="width:100px;"></a>
               </td>
               <td class="c-table-cell c-table-body-cell text-pull-left">
                 {{tab_data.planname}}
