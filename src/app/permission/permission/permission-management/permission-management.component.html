@@ -38,29 +38,36 @@
                     <thead class="c-table-header">
                         <tr class="c-table-row c-table-row-header">
                             <th class="c-table-cell c-table-header-cell text-pull-left">
-                                Name
+                              email
                             </th>
                             <th class="c-table-cell c-table-header-cell text-pull-left">
-                                Url
+                              modules
                             </th>
                             <th class="c-table-cell c-table-header-cell text-pull-right">Actions</th>
+                            <th class="c-table-cell c-table-header-cell text-pull-right">Enable/Disable</th>
                         </tr>
                     </thead>
                     <tbody class="c-table-body" *ngIf="table_data && table_data.length>0">
                         <tr class="c-table-row" *ngFor="let tab_data of table_data; let i=index;">
 
-                            <td class="c-table-cell c-table-body-cell text-pull-left">{{(tab_data.name)}}</td>
+                            <td class="c-table-cell c-table-body-cell text-pull-left">{{(tab_data.email)}}</td>
 
-                            <td class="c-table-cell c-table-body-cell text-pull-left">{{(tab_data.url?.join(', '))}}</td>
+                            <td class="c-table-cell c-table-body-cell text-pull-left">{{tab_data.modules}}</td>
 
                             <td style="width: 90px;" class="c-table-cell c-table-body-cell text-pull-right">
-                                <div class="action-btn" title="Edit Slider" (click)="onClickEditSlider(tab_data)" style="color: #3985fc">
+                                <div class="action-btn" title="Edit User" (click)="onClickEditSlider(tab_data)" style="color: #3985fc">
                                     <i class="fa fa-edit"></i>
                                 </div>
-                                <div class="action-btn" title="Delete Slider" (click)="onClickDeleteSlider(tab_data)" style="color: #ff5151">
-                                    <i class="fa fa-trash"></i>
-                                </div>
                             </td>
+                            <td style="width: 90px;" class="c-table-cell c-table-body-cell text-pull-right">
+
+                              <div class="action-btn" *ngIf="tab_data.isEnabled" title="Mark As Disable" (click)="onClickStatusChange(tab_data)" style="color: #3985fc">
+                                  <i class="fa fa-check"></i>
+                              </div>
+                              <div class="action-btn" *ngIf="!tab_data.isEnabled" title="Mark As Enable" (click)="onClickStatusChange(tab_data)" style="color: #ff5151">
+                                  <i class="fa fa-times"></i>
+                              </div>
+                          </td>
                         </tr>
                     </tbody>
                     <tbody class="c-table-body" *ngIf="(!table_data || table_data.length==0)">

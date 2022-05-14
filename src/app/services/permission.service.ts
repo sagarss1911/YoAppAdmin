@@ -7,10 +7,11 @@ import { environment } from "../../environments/environment";
 })
 export class PermissionService {
 
-  private getAllPermissionUrl = environment.url + "/api/v1/admin/Permission/get_all_permission_urls/";
-  private addPermissionUrl = environment.url + "/api/v1/admin/Permission/add_permission/";
-  private getAllPermissionListUrl = environment.url + "/api/v1/admin/Permission/get_all_permission_list/";
-  private updatePermissionUrl = environment.url + "/api/v1/admin/Permission/update_permission/";
+
+  private addUserUrl = environment.url + "/api/v1/admin/user_management/add_admin_user/";
+  private getAllUserListUrl = environment.url + "/api/v1/admin/user_management/get_all_user_list/";
+  private updateUserUrl = environment.url + "/api/v1/admin/user_management/update_user/";
+  private statusChangeUrl = environment.url + "/api/v1/admin/user_management/status_change/";
 
   constructor(private http: HttpClient) { }
   getHeader(): HttpHeaders {
@@ -18,17 +19,19 @@ export class PermissionService {
     headers = headers.append('x-auth-api-key', environment.key);
     return headers;
   }
-  getAllPermissionUrlList() {
-    return this.http.get(this.getAllPermissionUrl, { 'headers': this.getHeader() });
+
+  addUser(data) {
+    return this.http.post(this.addUserUrl, data, { 'headers': this.getHeader() });
   }
-  addPermission(data) {
-    return this.http.post(this.addPermissionUrl, data, { 'headers': this.getHeader() });
+  getAllUserList(data) {
+    return this.http.post(this.getAllUserListUrl, data, { 'headers': this.getHeader() });
   }
-  getAllPermissionList(data) {
-    return this.http.post(this.getAllPermissionListUrl, data, { 'headers': this.getHeader() });
+  updateUser(id, data) {
+    return this.http.put(this.updateUserUrl + id, data, { 'headers': this.getHeader() });
   }
-  updatePermission(id, data) {
-    return this.http.put(this.updatePermissionUrl + id, data, { 'headers': this.getHeader() });
+  statusChange(id, data) {
+    return this.http.put(this.statusChangeUrl + id, data, { 'headers': this.getHeader() });
   }
+
 
 }

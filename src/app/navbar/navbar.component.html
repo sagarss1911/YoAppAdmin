@@ -17,54 +17,58 @@
             <!-- <div class="sidebar-brand-text mx-3">Excel <span>Hire</span></div> -->
         </a>
         <!-- Nav Item - Dashboard -->
-        <li class="nav-item">
-            <a class="nav-link" routerLink='/dashboard' routerLinkActive="active">
+        <li class="nav-item" *ngIf="permissions.includes('dashboard')">
+            <a class="nav-link" routerLink='/dashboard' routerLinkActive="active" >
                 <span>Dashboard</span></a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" routerLink='/permission' routerLinkActive="active">
-                <span>Permission </span></a>
+        <li class="nav-item" *ngIf="permissions.includes('admin-users')">
+            <a class="nav-link" routerLink='/permission' routerLinkActive="active" >
+                <span>Admin Users</span></a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" routerLink='/faqs' routerLinkActive="active">
+        <li class="nav-item" *ngIf="permissions.includes('faqs')">
+            <a class="nav-link" routerLink='/faqs' routerLinkActive="active" >
                 <span>FAQ</span></a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="permissions.includes('legal')">
             <a class="nav-link" routerLink='/legal' routerLinkActive="active">
                 <span>Legal</span></a>
         </li>
 
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="permissions.includes('support-category')">
             <a class="nav-link" routerLink='/support-category' routerLinkActive="active">
                 <span>Support Category </span></a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="permissions.includes('support-request')">
             <a class="nav-link" routerLink='/support-request' routerLinkActive="active">
                 <span>Support Request </span></a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="permissions.includes('bank-transfer')">
             <a class="nav-link" routerLink='/bank-transfer' routerLinkActive="active">
                 <span>Bank Transfer </span></a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="permissions.includes('cash-pickup')">
             <a class="nav-link" routerLink='/cash-pickup' routerLinkActive="active">
                 <span>Cash Pickup </span></a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="permissions.includes('merchant')">
           <a class="nav-link" routerLink='/merchant' routerLinkActive="active">
               <span>Merchant </span></a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="permissions.includes('plans')">
           <a class="nav-link" routerLink='/plans' routerLinkActive="active">
               <span>Merchant Plans</span></a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="permissions.includes('bank-transfer-merchant')">
           <a class="nav-link" routerLink='/bank-transfer-merchant' routerLinkActive="active">
               <span>Merchant Bank Transfer</span></a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="permissions.includes('cash-pickup-merchant')">
           <a class="nav-link" routerLink='/cash-pickup-merchant' routerLinkActive="active">
               <span>Merchant Cashpickup</span></a>
+        </li>
+        <li class="nav-item" *ngIf="permissions.includes('cash-topup')">
+          <a class="nav-link" routerLink='/cash-topup' routerLinkActive="active">
+              <span>User CashTopup</span></a>
         </li>
 
 

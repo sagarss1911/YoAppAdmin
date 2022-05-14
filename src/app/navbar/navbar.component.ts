@@ -23,12 +23,13 @@ export class NavbarComponent implements OnInit {
   oldPass: any;
   newPass: any;
   conPass: any;
-  permissions: any = {};
+  permissions: any = [];
   loading: boolean = false;
   organization_logo_url = "assets/img/ALCOPHONY-LOGO.png";
   newNotificationCount: any = 0;
   userImage: any;
   isLicenceValidated = true;
+
   constructor(
     private authservice: AuthService,
     private userService: UserService,
@@ -41,6 +42,8 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.permissions = localStorage.permission
+
     $('#sidebarToggleTop').on('click', function () {
       $('.sidebar-dark ').toggleClass('toggled');
     });

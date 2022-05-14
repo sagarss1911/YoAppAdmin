@@ -36,10 +36,11 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.authService.login(data).subscribe((response: any) => {
       this.loading = false;
-      if (response.data && response.data.accessToken && response.data.userId) {
+      if (response.data && response.data.accessToken && response.data.id) {
         this._toastMessageService.alert("Success", "Login Successfull, Please wait...");
         localStorage.token = response.data.accessToken;
-        localStorage.userid = response.data.userId;
+        localStorage.userid = response.data.id;
+        localStorage.permission = response.data.modules;
         this.authService.setIsAuth(true);
         this.router.navigate(['/']);
       }

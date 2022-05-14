@@ -21,21 +21,33 @@ export class AddUpdatePermissionModalComponent extends BaseModalComponent implem
   setting_Obj: any;
   permission_Obj: any = [];
   dialogResult: any;
-  permission_url_list = []
+  permission_url_list = [{name:'Dashboard',value:'dashboard'},{name:'Admin Users',value:'admin-users'},
+  {name:'FAQ',value:'faqs'},
+  {name:'Legal',value:'legal'},
+  {name:'Support Category',value:'support-category'},
+  {name:'Support Request',value:'support-request'},
+  {name:'Bank Transfer',value:'bank-transfer'},
+  {name:'Cash Pickup',value:'cash-pickup'},
+  {name:'Merchant',value:'merchant'},
+  {name:'Merchant Plans',value:'plans'},
+  {name:'Merchant Bank Transfer',value:'bank-transfer-merchant'},
+  {name:'Merchant Cashpickup',value:'cash-pickup-merchant'},
+  {name:'User CashTopup',value:'cash-topup'},
+]
   newImageUploaded: boolean = false;
   config = {
     placeholder: '',
     tabsize: 2,
     height: '200px',
     uploadImagePath: '/api/upload',
-    
+
   }
   @ViewChild('sliderImageFile') sliderImageFile: any;
   constructor(public modalRef: BsModalRef, private _toastMessageService: ToastMessageService,
     private commonHelper: CommonHelper, private permissionService: PermissionService, private modalService: BsModalService,private sanitizer: DomSanitizer) { super(modalRef); }
 
   ngOnInit() {
-    this.getAllPermissionUrl();
+
   }
 
   onClose() {
@@ -48,37 +60,21 @@ export class AddUpdatePermissionModalComponent extends BaseModalComponent implem
     this.close(true);
   }
 
-  getAllPermissionUrl() {
-    this.loading = true;
-    this.permissionService.getAllPermissionUrlList().subscribe((res: any) => {
-      this.loading = true;
-      if (res.status == 200 && res.data) {
-        this.loading = false;
-        let allPermissionUrl = []
-        res.data.forEach(x => {
-          allPermissionUrl.push({name:x , value:x})
-        })
-        this.permission_url_list = allPermissionUrl.length ? allPermissionUrl : []
 
-      }
-    }, (error) => {
-      this.loading = false;
-      this.commonHelper.showError(error);
-    })
-  }
 
   addSupportCategory() {
     let params = {
-      name: this.permission_Obj.name,
-      url: this.permission_Obj.url
+      email: this.permission_Obj.email,
+      password: this.permission_Obj.password,
+      modules: this.permission_Obj.modules
     }
     this.loading = true;
-    this.permissionService.addPermission(params).subscribe((res: any) => {
+    this.permissionService.addUser(params).subscribe((res: any) => {
       this.loading = false;
       if (res.status == 200 && res.data) {
-        let result = {};
 
-        this._toastMessageService.alert("success", "Support category added successfully.");
+
+        this._toastMessageService.alert("success", "User added successfully.");
         this.dialogResult = res.data;
         this.done();
       }
@@ -90,16 +86,19 @@ export class AddUpdatePermissionModalComponent extends BaseModalComponent implem
 
 
   updateSupportCategory(){
+
     let params = {
-      name: this.permission_Obj.name,
-      url: this.permission_Obj.url
+      modules: this.permission_Obj.modules,
+      resetpassword: this.permission_Obj.resetpassword,
+      password: this.permission_Obj.resetpassword ? this.permission_Obj.password : 0,
+
     }
     this.loading = true;
-    this.permissionService.updatePermission(this.permission_Obj.id,params).subscribe((res: any) => {
+    this.permissionService.updateUser(this.permission_Obj.id,params).subscribe((res: any) => {
       this.loading = false;
       if (res.status == 200 && res.data) {
-        this._toastMessageService.alert("success", "updated successfully.");
-        this.dialogResult = res.data;
+        this._toastMessageService.alert("success", "User updated successfully.");
+        this.dialogResult = {id:this.permission_Obj.id,modules:this.permission_Obj.modules};
         this.done();
       }
     }, (error) => {

@@ -10,34 +10,54 @@
     </div>
 </div>
 
-<div class="modal-body custom-modal-body" *ngIf="permission_Obj.name">
+<div class="modal-body custom-modal-body" >
     <form #f="ngForm" novalidate autocomplete="off">
         <div class="row">
             <div class="col-12 ">
                 <div class="form-group">
-                    <label>Permission <span class="c-red">*</span></label>
-                    <input type="text" class="form-control" id="name" placeholder="Enter Permission Name" [(ngModel)]="permission_Obj.name" name="name" #name="ngModel" required />
-                    <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
-                        <p>Permission can't be blank.</p>
+                    <label>User Email <span class="c-red">*</span></label>
+                    <input type="text" class="form-control" id="email" placeholder="Enter Email" [(ngModel)]="permission_Obj.email" name="email" #email="ngModel" required />
+                    <div class="alert alert-danger" *ngIf="email.touched && email.invalid">
+                        <p>Email can't be blank.</p>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="row" *ngIf="dialogType == 'update'">
+          <div class="col-12">
+              <div class="form-group">
+                  <label>Reset Password </label>
+                  <input type="checkbox" class="form-control" id="resetpassword"  [(ngModel)]="permission_Obj.resetpassword" name="resetpassword" #resetpassword="ngModel" />
+
+              </div>
+          </div>
+      </div>
+        <div class="row">
+          <div class="col-12 ">
+              <div class="form-group">
+                  <label>User Password <span class="c-red">*</span></label>
+                  <input type="password" class="form-control" id="password" placeholder="Enter password" [(ngModel)]="permission_Obj.password" name="password" #password="ngModel" required />
+                  <div class="alert alert-danger" *ngIf="password.touched && password.invalid">
+                      <p>password can't be blank.</p>
+                  </div>
+              </div>
+          </div>
+      </div>
         <div class="row">
             <div class="col-12">
                 <div class="form-group">
-                    <label for="productname">Permission Url <span class="c-red">*</span></label>
+                    <label for="productname">Modules <span class="c-red">*</span></label>
                     <p-multiSelect #url="ngModel" id="url" name="url" [options]="permission_url_list"
-                        optionValue="value" optionLabel="name" placeholder="Select Permission Url"
-                        defaultLabel="Select Related Projets" [(ngModel)]="permission_Obj.url"
+                        optionValue="value" optionLabel="name" placeholder="Select Modules"
+                        [(ngModel)]="permission_Obj.modules"
                         [ngModelOptions]="{standalone: true}">
                     </p-multiSelect>
                 </div>
             </div>
         </div>
         <div class="footer-block  mb-2 mt-4">
-            <button type="submit" *ngIf="dialogType == 'add'" class="btn green-btn" [disabled]="f.invalid || !permission_Obj.name || !permission_Obj.url" (click)="addSupportCategory()">Add</button>
-            <button type="submit" *ngIf="dialogType == 'update'" class="btn green-btn" [disabled]="f.invalid || !permission_Obj.name || !permission_Obj.url" (click)="updateSupportCategory()">Update
+            <button type="submit" *ngIf="dialogType == 'add'" class="btn green-btn" [disabled]="f.invalid || !permission_Obj.email || !permission_Obj.password || !permission_Obj.modules" (click)="addSupportCategory()">Add</button>
+            <button type="submit" *ngIf="dialogType == 'update'" class="btn green-btn" [disabled]="f.invalid || !permission_Obj.email || !permission_Obj.password || !permission_Obj.modules" (click)="updateSupportCategory()">Update
         </button>
             <button type="button" class="btn gray-btn" (click)="onClose()">Cancel</button>
         </div>

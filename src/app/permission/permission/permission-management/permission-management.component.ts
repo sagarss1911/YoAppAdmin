@@ -48,10 +48,10 @@ export class PermissionManagementComponent implements OnInit {
       if(this.filters.searchtext) {
         params["filters"]["searchtext"] = this.filters.searchtext;
       }
-      this.permissionService.getAllPermissionList(params).subscribe((res: any) => {
+      this.permissionService.getAllUserList(params).subscribe((res: any) => {
         if (res.status == 200 && res.data) {
           this.table_data = [];
-          this.table_data = JSON.parse(JSON.stringify(res.data));
+          this.table_data = JSON.parse(JSON.stringify(res.data.slides));
           this.paginationValues.next({ type: 'page-init', page: params.page, totalTableRecords: res.data.total_count });
         } else if (res.status == 400) {
           this._toastMessageService.alert("error", res.data.msg);
@@ -77,29 +77,27 @@ export class PermissionManagementComponent implements OnInit {
   }
   onClickEditSlider(slider) {
     this.permission_Obj = JSON.parse(JSON.stringify(slider));
+    this.permission_Obj.modules = JSON.parse(this.permission_Obj.modules)
     this.dialogType = 'update';
     this.showAddSliderModal();
   }
-  onClickDeleteSlider(slider) {
-    // this.modalRef = this.modalService.show(ConfirmationModalComponent, { class: 'confirmation-modal', backdrop: 'static', keyboard: false });
-    // this.modalRef.content.decision = '';
-    // this.modalRef.content.confirmation_text = "Are you sure to delete this FAQ?"
-    // var tempSubObj: Subscription = this.modalService.onHide.subscribe(() => {
-    //   if (this.modalRef.content.decision == "done") {
-    //     this.loading = true;
-    //     this.supportCategoryService.deleteSupportCategory(slider.id).subscribe((res: any) => {
-    //       this.loading = false;
-    //       if (res.status == 200) {
-    //         remove(this.table_data, (ub: any) => ub.id == slider.id);
-    //         this._toastMessageService.alert("success", "Support Category deleted successfully.");
-    //       }
-    //     }, (error) => {
-    //       this.loading = false;
-    //       this.commonHelper.showError(error);
-    //     });
-    //   }
-    //   tempSubObj.unsubscribe();
-    // });
+  onClickStatusChange(slider) {
+    this.loading = true;
+    let newStatus = !slider.isEnabled;
+    this.permissionService.statusChange(slider.id,{ newStatus: newStatus }).subscribe((res: any) => {
+      if (res.status == 200) {
+        slider.isEnabled = newStatus;
+        this._toastMessageService.alert("success","Status Updated Successfully");
+      }
+      this.loading = false;
+
+    }, (error) => {
+      this.loading = false;
+      this.commonHelper.showError(error);
+
+    })
+
+
   }
   showAddSliderModal() {
     this.modalRef = this.modalService.show(AddUpdatePermissionModalComponent, { class: 'add-update-faq-modal', backdrop: 'static', keyboard: false });
@@ -113,7 +111,8 @@ export class PermissionManagementComponent implements OnInit {
         } else if (this.dialogType == "update") {
           for (var i = 0, fLen = this.table_data.length; i < fLen; i++) {
             if (this.table_data[i].id == this.modalRef.content.dialogResult.id) {
-              this.table_data[i] = this.modalRef.content.dialogResult;
+              console.log(this.modalRef.content.dialogResult.modules)
+              this.table_data[i].modules = JSON.stringify( this.modalRef.content.dialogResult.modules);
               break;
             }
           }

@@ -23,7 +23,8 @@ const routes: Routes = [
       { path: 'plans', loadChildren: () => import('src/app/plans/plans/plans.module').then(m => m.PlansModule) },
       { path: 'permission', loadChildren: () => import('src/app/permission/permission.module').then(m => m.PermissionModule) },
       { path: 'bank-transfer-merchant', loadChildren: () => import('src/app/bank-transfer-merchant/bank-transfer-merchant.module').then(m => m.BankTransferMerchantModule) },
-      { path: 'cash-pickup-merchant', loadChildren: () => import('src/app/cash-pickup-merchant/cash-pickup-merchant.module').then(m => m.CashPickupMerchantModule) }
+      { path: 'cash-pickup-merchant', loadChildren: () => import('src/app/cash-pickup-merchant/cash-pickup-merchant.module').then(m => m.CashPickupMerchantModule) },
+      { path: 'cash-topup', loadChildren: () => import('src/app/cash-topup/cash-topup.module').then(m => m.CashtopupModule) }
     ]
   },
   { path: '**', component: NotfoundComponent }
