@@ -90,6 +90,9 @@
               <th class="c-table-cell c-table-header-cell text-pull-right">Login Enabled</th>
               <th class="c-table-cell c-table-header-cell text-pull-right">Merchant Upgrade Request</th>
               <th class="c-table-cell c-table-header-cell text-pull-right">Merchant Upgraded</th>
+              <th class="c-table-cell c-table-header-cell text-pull-right">isCashTopupEnabled</th>
+              <th class="c-table-cell c-table-header-cell text-pull-right">Cash Topup Limit</th>
+
               <th class="c-table-cell c-table-header-cell text-pull-right">Action</th>
             </tr>
           </thead>
@@ -165,6 +168,17 @@
                     <i class="fa fa-times"></i>
                 </div>
               </td>
+              <td style="width: 50px;" class="c-table-cell c-table-body-cell text-pull-right">
+
+                <div class="action-btn" *ngIf="tab_data.isCashTopupEnabled == 0 " title="Mark As Enabled" (click)="onClickStatusChange(tab_data,'isCashTopupEnabled')" style="color: #3985fc">
+                    <i class="fa fa-check"></i>
+                </div>
+                <div class="action-btn" *ngIf="tab_data.isCashTopupEnabled == 1" title="Mark As Disabled" (click)="onClickStatusChange(tab_data,'isCashTopupEnabled')" style="color: #ff5151">
+                    <i class="fa fa-times"></i>
+                </div>
+              </td>
+              <td style="width: 90px;" class="c-table-cell c-table-body-cell text-pull-right">{{tab_data.cash_topup_limit}}</td>
+
 
             <td class="c-table-cell c-table-body-cell text-pull-right">
               <div class="action-btn" title="Edit Slider" (click)="onClickEditSlider(tab_data)"

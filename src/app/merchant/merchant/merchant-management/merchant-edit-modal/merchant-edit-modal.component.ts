@@ -80,7 +80,8 @@ this.getPlans()
       merchant_name: this.slider_obj.merchant_name,
       merchant_address: this.slider_obj.merchant_address,
       merchant_phone: this.slider_obj.merchant_phone,
-      membershipId: this.slider_obj.membershipId
+      membershipId: this.slider_obj.membershipId,
+      cash_topup_limit: this.slider_obj.cash_topup_limit,
     }
     data.append('body', JSON.stringify(params));
     this.loading = true;

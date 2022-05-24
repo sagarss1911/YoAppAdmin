@@ -48,6 +48,21 @@
       <div class="col-12 ">
         <div class="form-group">
           <div>
+            <label>Plan</label>
+          </div>
+
+          <p-dropdown  [options]="planList" placeholder="Select Plan" [(ngModel)]="slider_obj.membershipId" name="membershipId" optionLabel="planname" optionValue="id"></p-dropdown>
+        </div>
+      </div>
+      <div class="col-12 ">
+        <div class="form-group">
+          <label>Cash Topup Limit</label>
+          <input type="text" class="form-control" id="cash_topup_limit" name="cash_topup_limit" placeholder="Enter Cashtopup Limit" #cash_topup_limit="ngModel" [(ngModel)]="slider_obj.cash_topup_limit"  />
+        </div>
+      </div>
+      <div class="col-12 ">
+        <div class="form-group">
+          <div>
             <label>Licence</label>
           </div>
 
@@ -128,15 +143,7 @@
           </button>
         </div>
       </div>
-      <div class="col-12 ">
-        <div class="form-group">
-          <div>
-            <label>Plan</label>
-          </div>
 
-          <p-dropdown  [options]="planList" placeholder="Select Plan" [(ngModel)]="slider_obj.membershipId" name="membershipId" optionLabel="planname" optionValue="id"></p-dropdown>
-        </div>
-      </div>
     </div>
 
     <div class="footer-block  mb-2 mt-4">

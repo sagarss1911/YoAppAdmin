@@ -89,18 +89,22 @@ export class  MerchantManagementComponent implements OnInit {
     else if(field == "isMerchantUpgraded"){
       newData.status = data.isMerchantUpgraded == 0 ? 1 : 0;
     }
+    else if(field == "isCashTopupEnabled"){
+      newData.status = data.isCashTopupEnabled == 0 ? 1 : 0;
+    }
+
 
     this.merchantService.updateStatusMerchant(data.id,newData).subscribe((res: any) => {
       if (res.status == 200) {
         if(field == "isMerchantEnabled"){
           data.isMerchantEnabled = newData.status;
-
         }else if(field == "isMerchantVerified"){
           data.isMerchantVerified = newData.status;
         }else if(field == "isMerchantUpgraded"){
           data.isMerchantUpgraded = newData.status;
+        }else if(field == "isCashTopupEnabled"){
+          data.isCashTopupEnabled = newData.status;
         }
-
         this._toastMessageService.alert("success","Status Updated Successfully");
       }
       this.loading = false;
