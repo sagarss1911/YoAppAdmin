@@ -16,7 +16,7 @@ export class SupportRequestManagementComponent implements OnInit {
   public loading: boolean = false;
 
   public setting_Obj: any = {}
-
+  permissions: any = [];
   base_url = environment.url;
   public dialogType: string = "add";
   status: boolean = true
@@ -32,7 +32,10 @@ export class SupportRequestManagementComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.permissions = localStorage.permission
+    if(this.permissions.includes("support-request")){
     this.getSlidersWithFilters({ page: 1 });
+    }
   }
 
   getSlidersWithFilters(event) {

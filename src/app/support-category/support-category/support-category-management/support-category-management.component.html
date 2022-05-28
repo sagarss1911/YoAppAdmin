@@ -1,4 +1,4 @@
-<div class="container-fluid management-tab">
+<div class="container-fluid management-tab" *ngIf="permissions.includes('support-category')">
     <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' ,fullScreenBackdrop:true,backdropBackgroundColour:'rgba(255,255,255, 0.01)',primaryColour:'#005eff',secondaryColour:'#005eff',tertiaryColour:'#005eff'}">
     </ngx-loading>
 
@@ -73,6 +73,11 @@
             </div>
         </div>
     </div>
+</div>
+<div class="container-fluid" style="width:90%;max-width: 1250px;" *ngIf="!permissions.includes('support-category')">
+  <div style="border: 1px solid red;text-align:center;padding: 5px;">you don't have permission</div>
+
+  </div>
     <!-- Footer -->
     <app-footer></app-footer>
     <!-- End of Footer -->

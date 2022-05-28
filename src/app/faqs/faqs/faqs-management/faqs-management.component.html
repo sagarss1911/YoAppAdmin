@@ -1,4 +1,4 @@
-<div class="container-fluid management-tab">
+<div class="container-fluid management-tab" *ngIf="permissions.includes('faqs')">
   <ngx-loading [show]="loading"
     [config]="{ backdropBorderRadius: '14px' ,fullScreenBackdrop:true,backdropBackgroundColour:'rgba(255,255,255, 0.01)',primaryColour:'#005eff',secondaryColour:'#005eff',tertiaryColour:'#005eff'}">
   </ngx-loading>
@@ -49,8 +49,8 @@
           </tbody>
           <tbody class="c-table-body" *ngIf="(!table_data || table_data.length==0)">
             <tr class="c-table-row">
-              <td class="c-table-cell c-table-body-cell text-center" colspan="6">{{loading ? "Fetching a Data" : "No
-                Data Available"}}</td>
+              <td class="c-table-cell c-table-body-cell text-center" colspan="6">{{loading ? "Fetching a Data" : "No Data Available"}}
+              </td>
             </tr>
           </tbody>
         </table>
@@ -63,6 +63,9 @@
       </div>
     </div>
   </div>
-  <!-- Footer -->
-  <app-footer></app-footer>
-  <!-- End of Footer -->
+</div>
+<div class="container-fluid" style="width:90%;max-width: 1250px;" *ngIf="!permissions.includes('faqs')">
+  <div style="border: 1px solid red;text-align:center;padding: 5px;">you don't have permission</div>
+
+  </div>
+<app-footer></app-footer>

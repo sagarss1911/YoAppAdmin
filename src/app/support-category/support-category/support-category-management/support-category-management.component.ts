@@ -21,7 +21,7 @@ export class SupportCategoryManagementComponent implements OnInit {
   base_url = environment.url;
   public dialogType: string = "add";
 
-
+  permissions: any = [];
   public paginationValues: Subject<any> = new Subject();
   public table_data: any[] = [];
   public filters:any = {};
@@ -33,7 +33,10 @@ export class SupportCategoryManagementComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.permissions = localStorage.permission
+    if(this.permissions.includes("support-category")){
     this.getSlidersWithFilters({ page: 1 });
+    }
   }
 
   getSlidersWithFilters(event) {

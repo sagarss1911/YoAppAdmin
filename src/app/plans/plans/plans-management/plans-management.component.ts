@@ -20,7 +20,7 @@ export class  PlansManagementComponent implements OnInit {
   base_url = environment.url;
   public dialogType: string = "add";
   status : boolean = true
-
+  permissions: any = [];
   public paginationValues: Subject<any> = new Subject();
   public table_data: any[] = [];
   public slider_obj: any = {}
@@ -31,9 +31,12 @@ export class  PlansManagementComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.permissions = localStorage.permission
+    if(this.permissions.includes("plans")){
     this.getSlidersWithFilters({ page: 1 });
 
     this.table_data = [{data :{slides : {category : 'category'}}}]
+    }
   }
 
   getSlidersWithFilters(event) {

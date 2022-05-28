@@ -18,6 +18,7 @@ export class LegalManagementComponent implements OnInit {
   data: any;
   editformdata = false;
   base_url = environment.url;
+  permissions: any = [];
   config = {
     placeholder: '',
     tabsize: 2,
@@ -39,7 +40,11 @@ export class LegalManagementComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+this.permissions = localStorage.permission
+if(this.permissions.includes("legal")){
     this.getData();
+}
 
   }
 

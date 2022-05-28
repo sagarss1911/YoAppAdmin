@@ -1,4 +1,4 @@
-<div class="container-fluid" style="width:90%;max-width: 1250px;">
+<div class="container-fluid" style="width:90%;max-width: 1250px;" *ngIf="permissions.includes('dashboard')">
 
 
   <ngx-loading [show]="overallAnaLoading"
@@ -110,6 +110,11 @@
   </div>
 
   <!-- Footer -->
-  <app-footer></app-footer>
+
   <!-- End of Footer -->
   </div>
+  <div class="container-fluid" style="width:90%;max-width: 1250px;" *ngIf="!permissions.includes('dashboard')">
+    <div style="border: 1px solid red;text-align:center;padding: 5px;">you don't have permission</div>
+
+    </div>
+    <app-footer></app-footer>

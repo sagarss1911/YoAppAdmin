@@ -19,6 +19,7 @@ export class  CashTopupManagementComponent implements OnInit {
   public setting_Obj: any = {}
   users_data: any = [];
   todayDate = new Date();
+  permissions: any = [];
   base_url = environment.url;
   public dialogType: string = "add";
   status : boolean = true
@@ -34,10 +35,13 @@ export class  CashTopupManagementComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.permissions = localStorage.permission
+    if(this.permissions.includes("cash-topup")){
     this.getAllUsers();
     this.getSlidersWithFilters({ page: 1 });
 
     this.table_data = [{data :{slides : {category : 'category'}}}]
+    }
   }
   getAllUsers() {
     this.loading = true;

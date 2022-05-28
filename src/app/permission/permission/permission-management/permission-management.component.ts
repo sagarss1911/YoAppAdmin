@@ -20,7 +20,7 @@ export class PermissionManagementComponent implements OnInit {
 
   base_url = environment.url;
   public dialogType: string = "add";
-
+  permissions: any = [];
 
   public paginationValues: Subject<any> = new Subject();
   public table_data: any[] = [];
@@ -33,7 +33,10 @@ export class PermissionManagementComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.permissions = localStorage.permission
+    if(this.permissions.includes("admin-users")){
     this.getSlidersWithFilters({ page: 1 });
+    }
   }
 
   getSlidersWithFilters(event) {

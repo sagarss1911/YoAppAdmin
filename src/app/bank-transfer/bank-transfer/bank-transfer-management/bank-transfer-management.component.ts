@@ -23,7 +23,7 @@ export class  BankTransferManagementComponent implements OnInit {
 
   public paginationValues: Subject<any> = new Subject();
   public table_data: any[] = [];
-
+  permissions: any = [];
   public recordLimit: number = 10;
   public modalRef: BsModalRef;
   constructor(private bankTransferService: BankTransferService, private commonHelper: CommonHelper,
@@ -31,9 +31,12 @@ export class  BankTransferManagementComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.permissions = localStorage.permission
+    if(this.permissions.includes("'bank-transfer")){
     this.getSlidersWithFilters({ page: 1 });
 
     this.table_data = [{data :{slides : {category : 'category'}}}]
+    }
   }
 
   getSlidersWithFilters(event) {

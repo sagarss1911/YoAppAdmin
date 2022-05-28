@@ -13,7 +13,7 @@ import { Chart,registerables } from 'chart.js';
 })
 
 export class DashboardComponent implements OnInit {
-
+  permissions: any = [];
   overallAnaLoading: boolean = false;
   chart:any;
   bankTransferRequest:any = {
@@ -33,7 +33,11 @@ export class DashboardComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.getBankTransferCount();
+    this.permissions = localStorage.permission
+    if(this.permissions.includes("dashboard")){
+      this.getBankTransferCount();
+    }
+
   }
   getBankTransferCount(){
     this.overallAnaLoading = true;

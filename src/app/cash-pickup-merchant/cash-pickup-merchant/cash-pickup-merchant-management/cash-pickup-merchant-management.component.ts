@@ -20,7 +20,7 @@ export class  CashPickupMerchantManagementComponent implements OnInit {
   base_url = environment.url;
   public dialogType: string = "add";
   status : boolean = true
-
+  permissions: any = [];
   public paginationValues: Subject<any> = new Subject();
   public table_data: any[] = [];
   public merchant_data: any[] = [];
@@ -32,10 +32,13 @@ export class  CashPickupMerchantManagementComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.permissions = localStorage.permission
+    if(this.permissions.includes("cash-pickup-merchant")){
     this.getAllMerchants();
     this.getSlidersWithFilters({ page: 1 });
 
     this.table_data = [{data :{slides : {category : 'category'}}}]
+    }
   }
   getAllMerchants() {
     this.loading = true;

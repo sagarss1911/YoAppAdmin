@@ -18,6 +18,7 @@ export class  CashPickupManagementComponent implements OnInit {
   public setting_Obj: any = {}
   todayDate = new Date();
   base_url = environment.url;
+  permissions: any = [];
   public dialogType: string = "add";
   status : boolean = true
 
@@ -31,9 +32,12 @@ export class  CashPickupManagementComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.permissions = localStorage.permission
+    if(this.permissions.includes("cash-pickup")){
     this.getSlidersWithFilters({ page: 1 });
 
     this.table_data = [{data :{slides : {category : 'category'}}}]
+    }
   }
 
   getSlidersWithFilters(event) {
