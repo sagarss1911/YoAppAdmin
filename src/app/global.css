@@ -76,7 +76,7 @@ body {
     color: #323232;
     text-align: left;
     background-color: #fff;
-    width: 2500px;
+    overflow:hidden;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -645,7 +645,7 @@ pre code {
 .add-update-room-path-modal1  {
     max-width: 1000px !important;
   }
-  
+
   .add-update-room-path-modal1 .modal-content {
     padding: 18px 28px;
     border-radius: 20px;
@@ -10344,7 +10344,7 @@ html {
 
 body {
     height: 100%
-    
+
 }
 
 a:focus {

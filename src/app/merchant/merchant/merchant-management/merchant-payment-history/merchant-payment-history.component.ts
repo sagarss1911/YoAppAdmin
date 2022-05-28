@@ -21,19 +21,21 @@ export class MerchantPaymentHistoryComponent extends BaseModalComponent implemen
   slider_obj: any;
   dialogResult: any;
   public recordLimit: number = 10;
-  public filters:any = {};
+  public filters: any = {};
   public table_data: any[] = [];
   data: string;
-  slider_id : any;
+  slider_id: any;
   public paginationValues: Subject<any> = new Subject();
   constructor(public modalRef: BsModalRef, private _toastMessageService: ToastMessageService,
-    private commonHelper: CommonHelper,   private merchantService: MerchantService) { super(modalRef); }
+    private commonHelper: CommonHelper, private merchantService: MerchantService) { super(modalRef); }
 
   ngOnInit() {
-    this.slider_id = (localStorage.getItem('slider_id'))
-    if(this.slider_id) {
+    setTimeout(() => {
       this.getSlidersWithFilters({ page: 1 });
-    }
+    }, 1000);
+
+
+
   }
 
   onClose() {
@@ -55,7 +57,7 @@ export class MerchantPaymentHistoryComponent extends BaseModalComponent implemen
         limit: event.limit ? event.limit : this.recordLimit,
       };
       this.recordLimit = params.limit;
-      if(this.filters.searchtext) {
+      if (this.filters.searchtext) {
         params["filters"]["searchtext"] = this.filters.searchtext.trim();
       }
       if (this.filters.from_date) {
@@ -64,7 +66,7 @@ export class MerchantPaymentHistoryComponent extends BaseModalComponent implemen
       if (this.filters.to_date) {
         params["filters"]["to_date"] = this.filters.to_date;
       }
-      this.merchantService.getAllMerchantPaymentHistory(this.slider_id,params).subscribe((res: any) => {
+      this.merchantService.getAllMerchantPaymentHistory(this.slider_id, params).subscribe((res: any) => {
         if (res.status == 200 && res.data.slides) {
           this.table_data = [];
           this.table_data = JSON.parse(JSON.stringify(res.data.slides));

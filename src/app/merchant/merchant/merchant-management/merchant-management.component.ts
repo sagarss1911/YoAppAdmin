@@ -132,15 +132,16 @@ export class  MerchantManagementComponent implements OnInit {
   }
   onClickGetPaymentSummarySlider(slider) {
     this.slider_obj = JSON.parse(JSON.stringify(slider));
-    localStorage.setItem('slider_id',this.slider_obj.id)
     this.dialogType = 'payment-history';
     this.showHistorySliderModal();
   }
 
   showHistorySliderModal() {
     this.modalRef = this.modalService.show(MerchantPaymentHistoryComponent, { class: 'add-update-room-path-modal1', backdrop: 'static', keyboard: false });
+    this.modalRef.content.slider_id = this.slider_obj.id;
     this.modalRef.content.decision = "";
     this.modalRef.content.dialogType = this.dialogType;
+    console.log(this.slider_obj.id)
     this.modalRef.content.slider_obj = this.slider_obj;
     var tempSubObj: Subscription = this.modalRef.content.onHide.subscribe(() => {
       if (this.modalRef.content.decision === 'done') {
@@ -167,7 +168,7 @@ export class  MerchantManagementComponent implements OnInit {
 
   showAddSliderModal() {
     if(this.dialogType == 'payment-history') {
-      this.modalRef = this.modalService.show(UpdateMerchantModalComponent, { class: 'add-update-room-path-modal1', backdrop: 'static', keyboard: false });  
+      this.modalRef = this.modalService.show(UpdateMerchantModalComponent, { class: 'add-update-room-path-modal1', backdrop: 'static', keyboard: false });
     } else {
       this.modalRef = this.modalService.show(UpdateMerchantModalComponent, { class: 'add-update-room-path-modal', backdrop: 'static', keyboard: false });
     }
