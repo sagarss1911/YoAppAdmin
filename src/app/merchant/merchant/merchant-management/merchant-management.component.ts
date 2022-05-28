@@ -6,6 +6,7 @@ import { UpdateMerchantModalComponent } from 'src/app/merchant/merchant/merchant
 import { Subscription, Subject } from 'rxjs';
 import { environment } from "src/environments/environment";
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { MerchantPaymentHistoryComponent } from 'src/app/merchant/merchant/merchant-management/merchant-payment-history/merchant-payment-history.component';
 
 @Component({
   selector: 'merchant-management',
@@ -124,14 +125,34 @@ export class  MerchantManagementComponent implements OnInit {
     this.dialogType = 'update';
     this.showAddSliderModal();
   }
-  showAddSliderModal() {
-    this.modalRef = this.modalService.show(UpdateMerchantModalComponent, { class: 'add-update-room-path-modal', backdrop: 'static', keyboard: false });
+  onClickPayDueSlider(slider) {
+    this.slider_obj = JSON.parse(JSON.stringify(slider));
+    this.dialogType = 'paymentdue';
+    this.showAddSliderModal();
+  }
+  onClickGetPaymentSummarySlider(slider) {
+    this.slider_obj = JSON.parse(JSON.stringify(slider));
+    localStorage.setItem('slider_id',this.slider_obj.id)
+    this.dialogType = 'payment-history';
+    this.showHistorySliderModal();
+  }
+
+  showHistorySliderModal() {
+    this.modalRef = this.modalService.show(MerchantPaymentHistoryComponent, { class: 'add-update-room-path-modal1', backdrop: 'static', keyboard: false });
     this.modalRef.content.decision = "";
     this.modalRef.content.dialogType = this.dialogType;
     this.modalRef.content.slider_obj = this.slider_obj;
     var tempSubObj: Subscription = this.modalRef.content.onHide.subscribe(() => {
       if (this.modalRef.content.decision === 'done') {
-         if (this.dialogType == "update") {
+        if (this.dialogType == "update") {
+          for (var i = 0, fLen = this.table_data.length; i < fLen; i++) {
+            if (this.table_data[i].id == this.modalRef.content.dialogResult.id) {
+              this.table_data[i] = this.modalRef.content.dialogResult;
+              break;
+            }
+          }
+        }
+        if (this.dialogType == "paymentdue") {
           for (var i = 0, fLen = this.table_data.length; i < fLen; i++) {
             if (this.table_data[i].id == this.modalRef.content.dialogResult.id) {
               this.table_data[i] = this.modalRef.content.dialogResult;
@@ -142,7 +163,38 @@ export class  MerchantManagementComponent implements OnInit {
       }
       tempSubObj.unsubscribe();
     });
+  }
 
+  showAddSliderModal() {
+    if(this.dialogType == 'payment-history') {
+      this.modalRef = this.modalService.show(UpdateMerchantModalComponent, { class: 'add-update-room-path-modal1', backdrop: 'static', keyboard: false });  
+    } else {
+      this.modalRef = this.modalService.show(UpdateMerchantModalComponent, { class: 'add-update-room-path-modal', backdrop: 'static', keyboard: false });
+    }
+    this.modalRef.content.decision = "";
+    this.modalRef.content.dialogType = this.dialogType;
+    this.modalRef.content.slider_obj = this.slider_obj;
+    var tempSubObj: Subscription = this.modalRef.content.onHide.subscribe(() => {
+      if (this.modalRef.content.decision === 'done') {
+        if (this.dialogType == "update") {
+          for (var i = 0, fLen = this.table_data.length; i < fLen; i++) {
+            if (this.table_data[i].id == this.modalRef.content.dialogResult.id) {
+              this.table_data[i] = this.modalRef.content.dialogResult;
+              break;
+            }
+          }
+        }
+        if (this.dialogType == "paymentdue") {
+          for (var i = 0, fLen = this.table_data.length; i < fLen; i++) {
+            if (this.table_data[i].id == this.modalRef.content.dialogResult.id) {
+              this.table_data[i] = this.modalRef.content.dialogResult;
+              break;
+            }
+          }
+        }
+      }
+      tempSubObj.unsubscribe();
+    });
   }
   exportCurrent(){
     this.loading = true;

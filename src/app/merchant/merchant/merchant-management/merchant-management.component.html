@@ -92,6 +92,7 @@
               <th class="c-table-cell c-table-header-cell text-pull-right">Merchant Upgraded</th>
               <th class="c-table-cell c-table-header-cell text-pull-right">isCashTopupEnabled</th>
               <th class="c-table-cell c-table-header-cell text-pull-right">Cash Topup Limit</th>
+              <th class="c-table-cell c-table-header-cell text-pull-right">Payment Due</th>
 
               <th class="c-table-cell c-table-header-cell text-pull-right">Action</th>
             </tr>
@@ -177,10 +178,18 @@
                     <i class="fa fa-times"></i>
                 </div>
               </td>
-              <td style="width: 90px;" class="c-table-cell c-table-body-cell text-pull-right">{{tab_data.cash_topup_limit}}</td>
+              <td style="width: 90px;" class="c-table-cell c-table-body-cell text-pull-right">{{tab_data.cash_topup_limit == 0 ? tab_data.planTopUpLimit : tab_data.cash_topup_limit}}</td>
+              <td style="width: 90px;" class="c-table-cell c-table-body-cell text-pull-right">{{tab_data.merchant_due_payment}}</td>
 
-
-            <td class="c-table-cell c-table-body-cell text-pull-right">
+            <td class="c-table-cell c-table-body-cell text-pull-right" style="width: 100px;">
+              <div class="action-btn" title="Summary" (click)="onClickGetPaymentSummarySlider(tab_data)"
+                style="color: #3985fc">
+                <i class="fa fa-list-alt"></i>
+              </div>
+              <div class="action-btn" title="Pay Due" (click)="onClickPayDueSlider(tab_data)"
+                style="color: #3985fc">
+                <i class="fas fa-rupee-sign"></i>
+              </div>
               <div class="action-btn" title="Edit Slider" (click)="onClickEditSlider(tab_data)"
                 style="color: #3985fc">
                 <i class="fa fa-edit"></i>

@@ -1,0 +1,56 @@
+<ngx-loading [show]="loading"
+  [config]="{ backdropBorderRadius: '14px' ,fullScreenBackdrop:false,backdropBackgroundColour:'rgba(255,255,255, 0.01)',primaryColour:'#005eff',secondaryColour:'#005eff',tertiaryColour:'#005eff'}">
+</ngx-loading>
+
+<!-- Get Payment History -->
+<div class="modal-header custom-modal-header" *ngIf="dialogType == 'payment-history'">
+  <div style="font-size: 20px;">
+    Payment History
+  </div>
+  <div class="modal-header-close-btn" (click)="onClose()">
+    x
+  </div>
+</div>
+<div class="row" *ngIf="dialogType == 'payment-history'">
+  <div class="col-12">
+      <div class="c-table-wrapper table-responsive-small">
+        <table class="c-table">
+          <thead class="c-table-header">
+            <tr class="c-table-row c-table-row-header">
+              <th class="c-table-cell c-table-header-cell text-pull-left">
+                Due Amount
+              </th>
+              <th class="c-table-cell c-table-header-cell text-pull-left">
+                Paid Amount
+              </th>
+              <th class="c-table-cell c-table-header-cell text-pull-left">
+                Pending Amount
+              </th>
+            </tr>
+          </thead>
+          <tbody class="c-table-body" *ngIf="table_data && table_data.length>0">
+            <tr class="c-table-row" *ngFor="let tab_data of table_data; let i=index;">
+              <td class="c-table-cell c-table-body-cell text-pull-left">{{tab_data.amount_due}}</td>
+              <td class="c-table-cell c-table-body-cell text-pull-left">
+                {{(tab_data.amount_paid)}}
+              </td>
+              <td class="c-table-cell c-table-body-cell text-pull-left">
+                {{tab_data.total_pending}}
+              </td>
+            </tr>
+          </tbody>
+          <tbody class="c-table-body" *ngIf="(!table_data || table_data.length==0)">
+            <tr class="c-table-row">
+              <td class="c-table-cell c-table-body-cell text-center" colspan="6">{{loading ? "Fetching a Data" : "No Data Available"}} </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+          <div class="share-pagination">
+              <app-shared-pagination [paginationValues]="paginationValues" (onChange)="getSlidersWithFilters($event)">
+              </app-shared-pagination>
+          </div>
+      </div>
+  </div>
+</div>

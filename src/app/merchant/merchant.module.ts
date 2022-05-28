@@ -7,10 +7,12 @@ import { NgxLoadingModule } from 'ngx-loading';
 import { NgxSummernoteModule } from 'ngx-summernote';
 import { FormsModule } from '@angular/forms';
 import { UpdateMerchantModalComponent } from './merchant/merchant-management/merchant-edit-modal/merchant-edit-modal.component';
+import { MerchantPaymentHistoryComponent } from './merchant/merchant-management/merchant-payment-history/merchant-payment-history.component';
 @NgModule({
   declarations: [
     MerchantManagementComponent,
-    UpdateMerchantModalComponent
+    UpdateMerchantModalComponent,
+    MerchantPaymentHistoryComponent
   ],
   imports: [
     SharedModule,

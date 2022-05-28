@@ -1,8 +1,8 @@
 <ngx-loading [show]="loading"
   [config]="{ backdropBorderRadius: '14px' ,fullScreenBackdrop:false,backdropBackgroundColour:'rgba(255,255,255, 0.01)',primaryColour:'#005eff',secondaryColour:'#005eff',tertiaryColour:'#005eff'}">
 </ngx-loading>
-
-<div class="modal-header custom-modal-header">
+<!-- Update Merchant -->
+<div class="modal-header custom-modal-header" *ngIf="dialogType == 'update'">
   <div style="font-size: 20px;">
     Update Merchant
   </div>
@@ -11,7 +11,7 @@
   </div>
 </div>
 
-<div class="modal-body custom-modal-body">
+<div class="modal-body custom-modal-body" *ngIf="dialogType == 'update'">
   <form #f="ngForm" novalidate autocomplete="off" *ngIf="slider_obj">
     <div class="row">
 
@@ -150,6 +150,60 @@
 
       <button type="submit" *ngIf="dialogType == 'update'" class="btn green-btn" [disabled]="f.invalid"
         (click)="updateSlider()">Update</button>
+      <button type="button" class="btn gray-btn" (click)="onClose()">Cancel</button>
+    </div>
+  </form>
+</div>
+
+
+<!-- Pay Due -->
+<div class="modal-header custom-modal-header" *ngIf="dialogType == 'paymentdue'">
+  <div style="font-size: 20px;">
+    Pay Due Amount
+  </div>
+  <div class="modal-header-close-btn" (click)="onClose()">
+    x
+  </div>
+</div>
+
+<div class="modal-body custom-modal-body" *ngIf="dialogType == 'paymentdue'">
+  <form #duepay="ngForm" novalidate autocomplete="off" *ngIf="slider_obj">
+    <div class="row">
+
+      <div class="col-12 ">
+        <div class="form-group">
+          <label>Merchant Name : {{slider_obj.merchant_name}}</label>
+        </div>
+      </div>
+      <div class="col-12 ">
+        <div class="form-group">
+          <label>Due Payment : {{slider_obj.merchant_due_payment}}</label>
+        </div>
+      </div>
+      <div class="col-12 ">
+        <div class="form-group">
+          <label>Pay Amount</label>
+          <input type="number" class="form-control" id="amount_paid" name="amount_paid" placeholder="Enter Amount To Pay Due" [max]="slider_obj.merchant_due_payment" #amount_paid="ngModel" [(ngModel)]="slider_obj.amount_paid" required/>
+          <div class="alert alert-danger" *ngIf="slider_obj.amount_paid > slider_obj.merchant_due_payment">
+            <p>Payable amount can not be greater then due amount.</p>
+          </div>
+          <div class="alert alert-danger" *ngIf="slider_obj.amount_paid == 0">
+            <p>Please check payable amount.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 ">
+        <div class="form-group">
+          <label *ngIf="!slider_obj.amount_paid && slider_obj.amount_paid < slider_obj.merchant_due_payment">Next Amount To Be Paid : {{slider_obj.merchant_due_payment}}</label>
+          <label *ngIf="slider_obj.amount_paid && slider_obj.amount_paid < slider_obj.merchant_due_payment">Next Amount To Be Paid : {{slider_obj.merchant_due_payment - slider_obj.amount_paid}}</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-block  mb-2 mt-4">
+
+      <button type="submit" *ngIf="dialogType == 'paymentdue'" class="btn green-btn" [disabled]="duepay.invalid || slider_obj.amount_paid > slider_obj.merchant_due_payment || slider_obj.amount_paid == 0"
+        (click)="updateDuePaymentSlider();duepay.reset();">Pay Due</button>
       <button type="button" class="btn gray-btn" (click)="onClose()">Cancel</button>
     </div>
   </form>
