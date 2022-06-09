@@ -16,9 +16,9 @@
             <div class="col-12 ">
                 <div class="form-group">
                     <label>Users</label>
-                    <p-dropdown *ngIf="users_data.length >0" [options]="users_data" [virtualScroll]="true" [itemSize]="31"  [ngModelOptions]="{standalone: true}" [(ngModel)]="setting_Obj.selectedUser" filter="true"  filterBy="id,name,email" optionValue="user_unique_id" optionLabel="name"  placeholder="Select User" [style]="{'width':'100%'}" >
+                    <p-dropdown *ngIf="users_data.length >0" [options]="users_data" [virtualScroll]="true" [itemSize]="31"  [ngModelOptions]="{standalone: true}" [(ngModel)]="setting_Obj.selectedUser" filter="true"  filterBy="id,name,email,phone,user_unique_id" optionValue="user_unique_id" optionLabel="name"  placeholder="Select User" [style]="{'width':'100%'}" >
                       <ng-template let-user pTemplate="item">
-                              <span class="item-value1">{{user.id + " - " + user.name + " - " + user.email }}</span>
+                              <span class="item-value1">{{user.id + " - " +user.user_unique_id + " - " + user.name + " - " + user.email + " - " + user.phone }}</span>
                       </ng-template>
                     </p-dropdown>
                 </div>
