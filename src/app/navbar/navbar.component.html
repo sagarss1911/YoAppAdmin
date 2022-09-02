@@ -54,6 +54,10 @@
           <a class="nav-link" routerLink='/merchant' routerLinkActive="active">
               <span>Merchant </span></a>
         </li>
+         <li class="nav-item" *ngIf="permissions.includes('merchant')">
+          <a class="nav-link" routerLink='/merchant-reupload' routerLinkActive="active">
+              <span>Merchant Reuploaded Images</span></a>
+        </li>
         <li class="nav-item" *ngIf="permissions.includes('plans')">
           <a class="nav-link" routerLink='/plans' routerLinkActive="active">
               <span>Merchant Plans</span></a>

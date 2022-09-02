@@ -1,0 +1,42 @@
+<ngx-loading [show]="loading"
+  [config]="{ backdropBorderRadius: '14px' ,fullScreenBackdrop:false,backdropBackgroundColour:'rgba(255,255,255, 0.01)',primaryColour:'#005eff',secondaryColour:'#005eff',tertiaryColour:'#005eff'}">
+</ngx-loading>
+<!-- Update Merchant -->
+<div class="modal-header custom-modal-header" *ngIf="dialogType == 'update'">
+  <div style="font-size: 20px;">
+    Reset Documents
+  </div>
+  <div class="modal-header-close-btn" (click)="onClose()">
+    x
+  </div>
+</div>
+
+<div class="modal-body custom-modal-body" *ngIf="dialogType == 'update'">
+  <form #f="ngForm" novalidate autocomplete="off" *ngIf="slider_obj">
+    <div class="row">
+      <div class="col-12 ">
+        <div class="form-group">
+          <div>
+            <label>Seelct Fields to Reset</label>
+          </div>
+          <p-multiSelect #selectedFields="ngModel" id="selectedFields" name="selectedFields" [options]="imagesList"
+          optionValue="id" optionLabel="name" placeholder="Select Fields"
+          [(ngModel)]="slider_obj.selectedFields"
+          [ngModelOptions]="{standalone: true}">
+      </p-multiSelect>
+
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="footer-block  mb-2 mt-4">
+
+      <button type="submit" *ngIf="dialogType == 'update'" class="btn green-btn" [disabled]="f.invalid"
+        (click)="updateSlider()">Update</button>
+      <button type="button" class="btn gray-btn" (click)="onClose()">Cancel</button>
+    </div>
+  </form>
+</div>
+

@@ -20,6 +20,7 @@ const routes: Routes = [
       { path: 'bank-transfer', loadChildren: () => import('src/app/bank-transfer/bank-transfer.module').then(m => m.BankTransferModule) },
       { path: 'cash-pickup', loadChildren: () => import('src/app/cash-pickup/cash-pickup.module').then(m => m.CashPickupModule) },
       { path: 'merchant', loadChildren: () => import('src/app/merchant/merchant.module').then(m => m.MerchantModule) },
+      { path: 'merchant-reupload', loadChildren: () => import('src/app/merchant-reuploaded-images/merchant-reuploaded-images-management/merchant-reuploaded-images.module').then(m => m.MerchantReuploadedRoutingModule) },
       { path: 'plans', loadChildren: () => import('src/app/plans/plans/plans.module').then(m => m.PlansModule) },
       { path: 'permission', loadChildren: () => import('src/app/permission/permission.module').then(m => m.PermissionModule) },
       { path: 'bank-transfer-merchant', loadChildren: () => import('src/app/bank-transfer-merchant/bank-transfer-merchant.module').then(m => m.BankTransferMerchantModule) },

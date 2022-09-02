@@ -11,7 +11,11 @@ export class MerchantService {
   private getAllMerchantUrl = environment.url + "/api/v1/admin/merchant/get_all_merchant";
   private exportAllMerchantUrl = environment.url + "/api/v1/admin/merchant/export_all_merchant";
   private updateMerchantUrl = environment.url + "/api/v1/admin/merchant/update_merchant_status/";
+  private acceptImageChangeRequestUrl = environment.url + "/api/v1/admin/merchant/accept_merchant_images_request/";
+
   private updateMerchantProfileUrl = environment.url + "/api/v1/admin/merchant/update_merchant/";
+  private resetMerchantImagesUrl = environment.url + "/api/v1/admin/merchant/reset_merchant_images/";
+
   private updateMerchantDuePaymentUrl = environment.url + "/api/v1/admin/merchant/update_merchant_due_payment/";
   private getAllMerchantPaymentHistoryUrl = environment.url + "/api/v1/admin/merchant/get_topup_merchant_history/";
 
@@ -33,8 +37,14 @@ export class MerchantService {
   updateStatusMerchant(id, data) {
     return this.http.put(this.updateMerchantUrl + id, data, { 'headers': this.getHeader() });
   }
+  acceptImageChangeRequest(id) {
+    return this.http.put(this.acceptImageChangeRequestUrl + id,{}, { 'headers': this.getHeader() });
+  }
   updateMerchantProfile(id, data) {
     return this.http.put(this.updateMerchantProfileUrl + id, data, { 'headers': this.getHeader() });
+  }
+  resetMerchantImages(id, data) {
+    return this.http.put(this.resetMerchantImagesUrl + id, data, { 'headers': this.getHeader() });
   }
   updateMerchantDuePayment(id, data) {
     return this.http.put(this.updateMerchantDuePaymentUrl + id, data, { 'headers': this.getHeader() });

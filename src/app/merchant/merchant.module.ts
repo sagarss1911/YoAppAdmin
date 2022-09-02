@@ -8,11 +8,14 @@ import { NgxSummernoteModule } from 'ngx-summernote';
 import { FormsModule } from '@angular/forms';
 import { UpdateMerchantModalComponent } from './merchant/merchant-management/merchant-edit-modal/merchant-edit-modal.component';
 import { MerchantPaymentHistoryComponent } from './merchant/merchant-management/merchant-payment-history/merchant-payment-history.component';
+import { MerchantResetImagesModalComponent } from './merchant/merchant-management/merchant-reset-images/merchant-reset-images-modal.component';
+
 @NgModule({
   declarations: [
     MerchantManagementComponent,
     UpdateMerchantModalComponent,
-    MerchantPaymentHistoryComponent
+    MerchantPaymentHistoryComponent,
+    MerchantResetImagesModalComponent
   ],
   imports: [
     SharedModule,
@@ -23,7 +26,8 @@ import { MerchantPaymentHistoryComponent } from './merchant/merchant-management/
     NgxSummernoteModule
   ],
   providers: [
-    UpdateMerchantModalComponent
+    UpdateMerchantModalComponent,
+    MerchantResetImagesModalComponent
   ],
 })
 export class  MerchantModule {}

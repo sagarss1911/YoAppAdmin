@@ -1,0 +1,126 @@
+.footer-block button{
+	display: inline-block;
+	margin-right: 15px;
+}
+
+.input-switch {
+	display: block;
+}
+
+.file-detail-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    text-align: left;
+    width: 50%;
+    margin-bottom: 0.8rem;
+}
+.checkboxmargin{
+  margin-right:10px;
+}
+.close-btn-wrapper {
+	font-size: 18px;
+	cursor: pointer;
+}
+
+.uimage {
+	width: 5rem;
+	height: 5rem;
+	border: 1px solid #f4f4f4;
+}
+
+.uimage img {
+	width: 100%;
+    height: 100%;
+}
+.p-multiselect {
+  -ms-user-select:none;
+  -webkit-user-select:none;
+  cursor:pointer;
+  display:inline-flex;
+  position:relative;
+  user-select:none
+ }
+ .p-multiselect-trigger {
+  align-items:center;
+  display:flex;
+  flex-shrink:0;
+  justify-content:center
+ }
+ .p-multiselect-label-container {
+  cursor:pointer;
+  flex:1 1 auto;
+  overflow:hidden
+ }
+ .p-multiselect-label {
+  cursor:pointer;
+  display:block;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap
+ }
+ .p-multiselect-label-empty {
+  overflow:hidden;
+  visibility:hidden
+ }
+ .p-multiselect-token {
+  align-items:center;
+  cursor:default;
+  display:inline-flex;
+  flex:0 0 auto
+ }
+ .p-multiselect-token-icon {
+  cursor:pointer
+ }
+ .p-multiselect .p-multiselect-panel {
+  min-width:100%
+ }
+ .p-multiselect-panel {
+  position:absolute
+ }
+ .p-multiselect-items-wrapper {
+  overflow:auto
+ }
+ .p-multiselect-items {
+  list-style-type:none;
+  margin:0;
+  padding:0
+ }
+ .p-multiselect-item {
+  align-items:center;
+  cursor:pointer;
+  display:flex;
+  font-weight:400;
+  overflow:hidden;
+  position:relative;
+  white-space:nowrap
+ }
+ .p-multiselect-header {
+  align-items:center;
+  display:flex;
+  justify-content:space-between
+ }
+ .p-multiselect-filter-container {
+  flex:1 1 auto;
+  position:relative
+ }
+ .p-multiselect-filter-icon {
+  margin-top:-.5rem;
+  position:absolute;
+  top:50%
+ }
+ .p-multiselect-filter-container .p-inputtext {
+  width:100%
+ }
+ .p-multiselect-close {
+  align-items:center;
+  display:flex;
+  flex-shrink:0;
+  justify-content:center;
+  overflow:hidden;
+  position:relative
+ }
+ .p-fluid .p-multiselect {
+  display:flex
+ }

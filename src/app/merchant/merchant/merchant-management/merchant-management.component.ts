@@ -7,6 +7,7 @@ import { Subscription, Subject } from 'rxjs';
 import { environment } from "src/environments/environment";
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MerchantPaymentHistoryComponent } from 'src/app/merchant/merchant/merchant-management/merchant-payment-history/merchant-payment-history.component';
+import { MerchantResetImagesModalComponent } from 'src/app/merchant/merchant/merchant-management/merchant-reset-images/merchant-reset-images-modal.component';
 
 @Component({
   selector: 'merchant-management',
@@ -125,6 +126,29 @@ export class  MerchantManagementComponent implements OnInit {
     this.dialogType = 'update';
     this.showAddSliderModal();
   }
+  onClickResetImages(slider) {
+    this.slider_obj = JSON.parse(JSON.stringify(slider));
+    this.dialogType = 'update';
+    this.showResetImagesModal();
+  }
+  showResetImagesModal() {
+    this.modalRef = this.modalService.show(MerchantResetImagesModalComponent, { class: 'add-update-room-path-modal', backdrop: 'static', keyboard: false });
+    this.modalRef.content.decision = "";
+    this.modalRef.content.dialogType = this.dialogType;
+    this.modalRef.content.slider_obj = this.slider_obj;
+    var tempSubObj: Subscription = this.modalRef.content.onHide.subscribe(() => {
+      if (this.modalRef.content.decision === 'done') {
+        for (var i = 0, fLen = this.table_data.length; i < fLen; i++) {
+          if (this.table_data[i].id == this.modalRef.content.dialogResult.id) {
+            this.table_data[i] = this.modalRef.content.dialogResult;
+            break;
+          }
+        }
+      }
+      tempSubObj.unsubscribe();
+    });
+  }
+
   onClickPayDueSlider(slider) {
     this.slider_obj = JSON.parse(JSON.stringify(slider));
     this.dialogType = 'paymentdue';

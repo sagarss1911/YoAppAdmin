@@ -33,16 +33,7 @@
       </div>
     </div>
   </div>
-  <div class="col-12 col-xl-4 col-md-4 " style="text-align: right;">
-    <div class="form-group">
-      <div class="btn blue-btn" (click)="exportCurrent();">
-        <div class="dib">Export</div>
-      </div>
-      <div class="btn gray-btn ml-3" (click)="exportAll();">
-        <div class="dib">Export All</div>
-      </div>
-    </div>
-  </div>
+
 </div>
 <div class="row">
   <div class="col-12">
@@ -53,9 +44,7 @@
               <th class="c-table-cell c-table-header-cell text-pull-left">
                 Name
               </th>
-              <th class="c-table-cell c-table-header-cell text-pull-left">
-                Address
-              </th>
+
               <th class="c-table-cell c-table-header-cell text-pull-left">
                 Phone
               </th>
@@ -81,18 +70,10 @@
                 Upgraded Image4
               </th>
               <th class="c-table-cell c-table-header-cell text-pull-left">
-                Current Plan
+                Image Requested
               </th>
-              <th class="c-table-cell c-table-header-cell text-pull-left">
-                Date
-              </th>
-              <th class="c-table-cell c-table-header-cell text-pull-right">Verification</th>
-              <th class="c-table-cell c-table-header-cell text-pull-right">Login Enabled</th>
-              <th class="c-table-cell c-table-header-cell text-pull-right">Merchant Upgrade Request</th>
-              <th class="c-table-cell c-table-header-cell text-pull-right">Merchant Upgraded</th>
-              <th class="c-table-cell c-table-header-cell text-pull-right">isCashTopupEnabled</th>
-              <th class="c-table-cell c-table-header-cell text-pull-right">Cash Topup Limit</th>
-              <th class="c-table-cell c-table-header-cell text-pull-right">Payment Due</th>
+
+
 
               <th class="c-table-cell c-table-header-cell text-pull-right">Action</th>
             </tr>
@@ -100,9 +81,7 @@
           <tbody class="c-table-body" *ngIf="table_data && table_data.length>0">
             <tr class="c-table-row" *ngFor="let tab_data of table_data; let i=index;">
               <td class="c-table-cell c-table-body-cell text-pull-left">{{tab_data.merchant_name}}</td>
-              <td class="c-table-cell c-table-body-cell text-pull-left">
-                {{(tab_data.merchant_address)}}
-              </td>
+
               <td class="c-table-cell c-table-body-cell text-pull-left">
                 {{tab_data.merchant_phone}}
               </td>
@@ -128,71 +107,13 @@
                 <a *ngIf="tab_data.upgraded_image4" target="_blank" href="{{tab_data.upgraded_image4}}" ><img *ngIf="tab_data.upgraded_image4" src="{{tab_data.upgraded_image4}}" alt="upgraded_image4" style="width:100px;"></a>
               </td>
               <td class="c-table-cell c-table-body-cell text-pull-left">
-                {{tab_data.planname}}
+                {{ tab_data.image_reuploaded_fields }}
               </td>
-
-              <td class="c-table-cell c-table-body-cell text-pull-left">
-                {{(tab_data.merchantCreatedAt | date: 'dd-MM-yyyy')}}
-              </td>
-              <td style="width: 90px;" class="c-table-cell c-table-body-cell text-pull-right">
-                  <div class="action-btn" *ngIf="tab_data.isMerchantVerified == 0 " title="Mark As Verified" (click)="onClickStatusChange(tab_data,'isMerchantVerified')" style="color: #3985fc">
-                      <i class="fa fa-check"></i>
-                  </div>
-                  <div class="action-btn" *ngIf="tab_data.isMerchantVerified == 1" title="Mark As Un-Verified" (click)="onClickStatusChange(tab_data,'isMerchantVerified')" style="color: #ff5151">
-                      <i class="fa fa-times"></i>
-                  </div>
-              </td>
-              <td style="width: 90px;" class="c-table-cell c-table-body-cell text-pull-right">
-
-                <div class="action-btn" *ngIf="tab_data.isMerchantEnabled == 0 " title="Mark As Enabled" (click)="onClickStatusChange(tab_data,'isMerchantEnabled')" style="color: #3985fc">
-                    <i class="fa fa-check"></i>
-                </div>
-                <div class="action-btn" *ngIf="tab_data.isMerchantEnabled == 1" title="Mark As Disabled" (click)="onClickStatusChange(tab_data,'isMerchantEnabled')" style="color: #ff5151">
-                    <i class="fa fa-times"></i>
-                </div>
-              </td>
-              <td style="width: 90px;" class="c-table-cell c-table-body-cell text-pull-right">
-
-                <div class="action-btn" *ngIf="tab_data.isUpgradeRequestSubmitted == 0 " style="color: #3985fc">
-                    <i class="fa fa-check"></i>
-                </div>
-                <div class="action-btn" *ngIf="tab_data.isUpgradeRequestSubmitted == 1" style="color: #ff5151">
-                    <i class="fa fa-times"></i>
-                </div>
-              </td>
-              <td style="width: 90px;" class="c-table-cell c-table-body-cell text-pull-right">
-
-                <div class="action-btn" *ngIf="tab_data.isMerchantUpgraded == 0 " title="Mark As Upgraded" (click)="onClickStatusChange(tab_data,'isMerchantUpgraded')" style="color: #3985fc">
-                    <i class="fa fa-check"></i>
-                </div>
-                <div class="action-btn" *ngIf="tab_data.isMerchantUpgraded == 1" title="Mark As Not-Upgraded" (click)="onClickStatusChange(tab_data,'isMerchantUpgraded')" style="color: #ff5151">
-                    <i class="fa fa-times"></i>
-                </div>
-              </td>
-              <td style="width: 50px;" class="c-table-cell c-table-body-cell text-pull-right">
-
-                <div class="action-btn" *ngIf="tab_data.isCashTopupEnabled == 0 " title="Mark As Enabled" (click)="onClickStatusChange(tab_data,'isCashTopupEnabled')" style="color: #3985fc">
-                    <i class="fa fa-check"></i>
-                </div>
-                <div class="action-btn" *ngIf="tab_data.isCashTopupEnabled == 1" title="Mark As Disabled" (click)="onClickStatusChange(tab_data,'isCashTopupEnabled')" style="color: #ff5151">
-                    <i class="fa fa-times"></i>
-                </div>
-              </td>
-              <td style="width: 90px;" class="c-table-cell c-table-body-cell text-pull-right">{{tab_data.cash_topup_limit == 0 ? tab_data.planTopUpLimit : tab_data.cash_topup_limit}}</td>
-              <td style="width: 90px;" class="c-table-cell c-table-body-cell text-pull-right">{{tab_data.merchant_due_payment}}</td>
 
             <td class="c-table-cell c-table-body-cell text-pull-right" style="width: 100px;">
-              <div class="action-btn" title="Summary" (click)="onClickGetPaymentSummarySlider(tab_data)"
+              <div class="action-btn" title="Edit Slider" (click)="onClickAcceptChanges(tab_data)"
                 style="color: #3985fc">
-                <i class="fa fa-list-alt"></i>
-              </div>
-              <div class="action-btn" title="Pay Due" (click)="onClickPayDueSlider(tab_data)"
-                style="color: #3985fc">
-                <i class="fas fa-money-bill"></i>
-              </div>
-              <div class="action-btn" title="Edit Merchant" (click)="onClickEditSlider(tab_data)"
-                style="color: #3985fc">
-                <i class="fa fa-edit"></i>
+                <i class="fa fa-check"></i>
               </div>
               <div class="action-btn" title="Edit Slider" (click)="onClickResetImages(tab_data)"
                 style="color: #3985fc">
@@ -203,7 +124,7 @@
           </tbody>
           <tbody class="c-table-body" *ngIf="(!table_data || table_data.length==0)">
             <tr class="c-table-row">
-              <td class="c-table-cell c-table-body-cell text-center" colspan="6">{{loading ? "Fetching a Data" : "No Data Available"}} </td>
+              <td class="c-table-cell c-table-body-cell text-center" colspan="11">{{loading ? "Fetching a Data" : "No Data Available"}} </td>
             </tr>
           </tbody>
         </table>

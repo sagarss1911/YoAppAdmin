@@ -1,0 +1,210 @@
+<ngx-loading [show]="loading"
+  [config]="{ backdropBorderRadius: '14px' ,fullScreenBackdrop:false,backdropBackgroundColour:'rgba(255,255,255, 0.01)',primaryColour:'#005eff',secondaryColour:'#005eff',tertiaryColour:'#005eff'}">
+</ngx-loading>
+<!-- Update Merchant -->
+<div class="modal-header custom-modal-header" *ngIf="dialogType == 'update'">
+  <div style="font-size: 20px;">
+    Update Merchant
+  </div>
+  <div class="modal-header-close-btn" (click)="onClose()">
+    x
+  </div>
+</div>
+
+<div class="modal-body custom-modal-body" *ngIf="dialogType == 'update'">
+  <form #f="ngForm" novalidate autocomplete="off" *ngIf="slider_obj">
+    <div class="row">
+
+      <div class="col-12 ">
+        <div class="form-group">
+          <label>Merchant Name</label>
+          <input type="text" class="form-control" id="merchant_name" name="merchant_name" placeholder="Enter Name" #merchant_name="ngModel"
+            [(ngModel)]="slider_obj.merchant_name" required />
+          <div class="alert alert-danger" *ngIf="merchant_name.touched && merchant_name.invalid">
+            <p>Name can't be blank.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 ">
+        <div class="form-group">
+          <label>Merchant Address</label>
+          <input type="text" class="form-control" id="merchant_address" name="merchant_address" placeholder="Enter Address" #merchant_address="ngModel"
+            [(ngModel)]="slider_obj.merchant_address" required />
+          <div class="alert alert-danger" *ngIf="merchant_address.touched && merchant_address.invalid">
+            <p>Address can't be blank.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 ">
+        <div class="form-group">
+          <label>Merchant Phone</label>
+          <input type="text" class="form-control" id="merchant_phone" name="merchant_phone" placeholder="Enter Phone" #merchant_phone="ngModel"
+            [(ngModel)]="slider_obj.merchant_phone" required />
+          <div class="alert alert-danger" *ngIf="merchant_phone.touched && merchant_phone.invalid">
+            <p>Phone can't be blank.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 ">
+        <div class="form-group">
+          <div>
+            <label>Plan</label>
+          </div>
+
+          <p-dropdown  [options]="planList" placeholder="Select Plan" [(ngModel)]="slider_obj.membershipId" name="membershipId" optionLabel="planname" optionValue="id"></p-dropdown>
+        </div>
+      </div>
+      <div class="col-12 ">
+        <div class="form-group">
+          <label>Cash Topup Limit</label>
+          <input type="text" class="form-control" id="cash_topup_limit" name="cash_topup_limit" placeholder="Enter Cashtopup Limit" #cash_topup_limit="ngModel" [(ngModel)]="slider_obj.cash_topup_limit"  />
+        </div>
+      </div>
+      <div class="col-12 ">
+        <div class="form-group">
+          <div>
+            <label>Licence</label>
+          </div>
+
+          <div class="uploaded-file-block" *ngIf="slider_obj.licence_proof_Url">
+            <div class="file-detail-wrap">
+              <div class="uimage"><img width="100px" alt="image" [src]="slider_obj.licence_proof_Url" /></div>
+              <div class="close-btn-wrapper" (click)="clearLicenceCLFile()"><i class="fa fa-times-circle"
+                  aria-hidden="true"></i></div>
+            </div>
+          </div>
+          <div class="uploaded-file-block" *ngIf="slider_obj.licence_proof && !slider_obj.licence_proof_Url">
+            <div class="file-detail-wrap">
+              <div class="uimage"><img width="100px" alt="image" [src]="slider_obj.licence_proof" /></div>
+            </div>
+          </div>
+          <button type="button" class="btn dark-blue-btn" (click)="licence_proof_File.click()">
+            <div>
+              <i class="fa fa-plus" aria-hidden="true"></i>
+              Upload
+            </div>
+            <input #licence_proof_File type="file" (change)="onLicenceCLUpload($event)" accept="image/*" style="display: none" />
+          </button>
+        </div>
+      </div>
+
+      <div class="col-12 ">
+        <div class="form-group">
+          <div>
+            <label>Address</label>
+          </div>
+
+          <div class="uploaded-file-block" *ngIf="slider_obj.address_proof_Url">
+            <div class="file-detail-wrap">
+              <div class="uimage"><img width="100px" alt="image" [src]="slider_obj.address_proof_Url" /></div>
+              <div class="close-btn-wrapper" (click)="clearAddressCLFile()"><i class="fa fa-times-circle"
+                  aria-hidden="true"></i></div>
+            </div>
+          </div>
+          <div class="uploaded-file-block" *ngIf="slider_obj.address_proof && !slider_obj.address_proof_Url">
+            <div class="file-detail-wrap">
+              <div class="uimage"><img width="100px" alt="image" [src]="slider_obj.address_proof" /></div>
+            </div>
+          </div>
+          <button type="button" class="btn dark-blue-btn" (click)="address_proof_File.click()">
+            <div>
+              <i class="fa fa-plus" aria-hidden="true"></i>
+              Upload
+            </div>
+            <input #address_proof_File type="file" (change)="onAddressCLUpload($event)" accept="image/*" style="display: none" />
+          </button>
+        </div>
+      </div>
+
+      <div class="col-12 ">
+        <div class="form-group">
+          <div>
+            <label>Utility</label>
+          </div>
+
+          <div class="uploaded-file-block" *ngIf="slider_obj.utility_proof_Url">
+            <div class="file-detail-wrap">
+              <div class="uimage"><img width="100px" alt="image" [src]="slider_obj.utility_proof_Url" /></div>
+              <div class="close-btn-wrapper" (click)="clearUtilityCLFile()"><i class="fa fa-times-circle"
+                  aria-hidden="true"></i></div>
+            </div>
+          </div>
+          <div class="uploaded-file-block" *ngIf="slider_obj.utility_proof && !slider_obj.utility_proof_Url">
+            <div class="file-detail-wrap">
+              <div class="uimage"><img width="100px" alt="image" [src]="slider_obj.utility_proof" /></div>
+            </div>
+          </div>
+          <button type="button" class="btn dark-blue-btn" (click)="utility_proof_File.click()">
+            <div>
+              <i class="fa fa-plus" aria-hidden="true"></i>
+              Upload
+            </div>
+            <input #utility_proof_File type="file" (change)="onUtilityCLUpload($event)" accept="image/*" style="display: none" />
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-block  mb-2 mt-4">
+
+      <button type="submit" *ngIf="dialogType == 'update'" class="btn green-btn" [disabled]="f.invalid"
+        (click)="updateSlider()">Update</button>
+      <button type="button" class="btn gray-btn" (click)="onClose()">Cancel</button>
+    </div>
+  </form>
+</div>
+
+
+<!-- Pay Due -->
+<div class="modal-header custom-modal-header" *ngIf="dialogType == 'paymentdue'">
+  <div style="font-size: 20px;">
+    Pay Due Amount
+  </div>
+  <div class="modal-header-close-btn" (click)="onClose()">
+    x
+  </div>
+</div>
+
+<div class="modal-body custom-modal-body" *ngIf="dialogType == 'paymentdue'">
+  <form #duepay="ngForm" novalidate autocomplete="off" *ngIf="slider_obj">
+    <div class="row">
+
+      <div class="col-12 ">
+        <div class="form-group">
+          <label>Merchant Name : {{slider_obj.merchant_name}}</label>
+        </div>
+      </div>
+      <div class="col-12 ">
+        <div class="form-group">
+          <label>Due Payment : {{slider_obj.merchant_due_payment}}</label>
+        </div>
+      </div>
+      <div class="col-12 ">
+        <div class="form-group">
+          <label>Pay Amount</label>
+          <input type="number" class="form-control" id="amount_paid" name="amount_paid" placeholder="Enter Amount To Pay Due" [max]="slider_obj.merchant_due_payment" #amount_paid="ngModel" [(ngModel)]="slider_obj.amount_paid" required/>
+          <div class="alert alert-danger" *ngIf="slider_obj.amount_paid > slider_obj.merchant_due_payment">
+            <p>Payable amount can not be greater then due amount.</p>
+          </div>
+          <div class="alert alert-danger" *ngIf="slider_obj.amount_paid == 0">
+            <p>Please check payable amount.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 ">
+        <div class="form-group">
+          <label *ngIf="!slider_obj.amount_paid && slider_obj.amount_paid < slider_obj.merchant_due_payment">Next Amount To Be Paid : {{slider_obj.merchant_due_payment}}</label>
+          <label *ngIf="slider_obj.amount_paid && slider_obj.amount_paid < slider_obj.merchant_due_payment">Next Amount To Be Paid : {{slider_obj.merchant_due_payment - slider_obj.amount_paid}}</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-block  mb-2 mt-4">
+
+      <button type="submit" *ngIf="dialogType == 'paymentdue'" class="btn green-btn" [disabled]="duepay.invalid || slider_obj.amount_paid > slider_obj.merchant_due_payment || slider_obj.amount_paid == 0"
+        (click)="updateDuePaymentSlider();duepay.reset();">Pay Due</button>
+      <button type="button" class="btn gray-btn" (click)="onClose()">Cancel</button>
+    </div>
+  </form>
+</div>
