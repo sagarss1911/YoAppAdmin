@@ -27,7 +27,7 @@ export class UpdateMerchantModalComponent extends BaseModalComponent implements 
   collection_data = []
   dialogResult: any;
   planList = []
-  newLicenceImageUploaded: boolean = false;
+  newvalid_IDImageUploaded: boolean = false;
   newAddressImageUploaded: boolean = false;
   newTINCardImageUploaded: boolean = false;
   @ViewChild('valid_ID_File') valid_ID_File: any;
@@ -70,7 +70,7 @@ export class UpdateMerchantModalComponent extends BaseModalComponent implements 
 
   updateSlider(){
     const data = new FormData();
-    if(this.newLicenceImageUploaded){
+    if(this.newvalid_IDImageUploaded){
       data.append('valid_ID', this.slider_obj.valid_ID_File);
     }
     if(this.newTINCardImageUploaded){
@@ -127,16 +127,16 @@ export class UpdateMerchantModalComponent extends BaseModalComponent implements 
     this.slider_obj.tag = event.name;
   }
 
-  clearLicenceCLFile() {
+  clearvalid_IDCLFile() {
     this.valid_ID_File.nativeElement.value = '';
     this.slider_obj.valid_ID_Url = '';
     this.slider_obj.valid_ID_File = null;
-    this.newLicenceImageUploaded = false;
+    this.newvalid_IDImageUploaded = false;
   }
 
-  onLicenceCLUpload(event) {
+  onvalid_IDCLUpload(event) {
     if (event.target.files && event.target.files[0]) {
-      this.newLicenceImageUploaded = true;
+      this.newvalid_IDImageUploaded = true;
       this.slider_obj.valid_ID_Url = this.sanitizer.bypassSecurityTrustUrl(
         URL.createObjectURL(event.target.files[0])
       );

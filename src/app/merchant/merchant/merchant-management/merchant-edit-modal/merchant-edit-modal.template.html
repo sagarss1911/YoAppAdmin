@@ -63,13 +63,13 @@
       <div class="col-12 ">
         <div class="form-group">
           <div>
-            <label>Licence</label>
+            <label>valid_ID Proof</label>
           </div>
 
           <div class="uploaded-file-block" *ngIf="slider_obj.valid_ID_Url">
             <div class="file-detail-wrap">
               <div class="uimage"><img width="100px" alt="image" [src]="slider_obj.valid_ID_Url" /></div>
-              <div class="close-btn-wrapper" (click)="clearLicenceCLFile()"><i class="fa fa-times-circle"
+              <div class="close-btn-wrapper" (click)="clearvalid_IDCLFile()"><i class="fa fa-times-circle"
                   aria-hidden="true"></i></div>
             </div>
           </div>
@@ -83,7 +83,7 @@
               <i class="fa fa-plus" aria-hidden="true"></i>
               Upload
             </div>
-            <input #valid_ID_File type="file" (change)="onLicenceCLUpload($event)" accept="image/*" style="display: none" />
+            <input #valid_ID_File type="file" (change)="onvalid_IDCLUpload($event)" accept="image/*" style="display: none" />
           </button>
         </div>
       </div>
