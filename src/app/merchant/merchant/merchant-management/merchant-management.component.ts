@@ -223,7 +223,7 @@ export class  MerchantManagementComponent implements OnInit {
   }
   exportCurrent(){
     this.loading = true;
-    let headerList = ["merchant_name","merchant_phone","merchant_address","licence_proof","address_proof","utility_proof","merchantCreatedAt","planname"]
+    let headerList = ["merchant_name","merchant_phone","merchant_address","valid_ID","address_proof","TIN_card","merchantCreatedAt","planname"]
     this.commonHelper.downloadFile(this.table_data,"Merchant Request", headerList);
     this.loading = false;
   }
@@ -243,7 +243,7 @@ export class  MerchantManagementComponent implements OnInit {
     this.loading = true;
     this.merchantService.exportAllMerchant(params).subscribe((res: any) => {
       if (res.status == 200 && res.data) {
-        let headerList = ["merchant_name","merchant_phone","merchant_address","licence_proof","address_proof","utility_proof","merchantCreatedAt","planname"]
+        let headerList = ["merchant_name","merchant_phone","merchant_address","valid_ID","address_proof","TIN_card","merchantCreatedAt","planname"]
 
 
         this.commonHelper.downloadFile(JSON.parse(JSON.stringify(res.data)),"Merchant Request All", headerList);

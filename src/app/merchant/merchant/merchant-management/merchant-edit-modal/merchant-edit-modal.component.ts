@@ -29,10 +29,10 @@ export class UpdateMerchantModalComponent extends BaseModalComponent implements 
   planList = []
   newLicenceImageUploaded: boolean = false;
   newAddressImageUploaded: boolean = false;
-  newUtilityImageUploaded: boolean = false;
-  @ViewChild('licence_proof_File') licence_proof_File: any;
+  newTINCardImageUploaded: boolean = false;
+  @ViewChild('valid_ID_File') valid_ID_File: any;
   @ViewChild('address_proof_File') address_proof_File: any;
-  @ViewChild('utility_proof_File') utility_proof_File: any;
+  @ViewChild('TIN_card_File') TIN_card_File: any;
   public paginationValues: Subject<any> = new Subject();
   constructor(public modalRef: BsModalRef, private _toastMessageService: ToastMessageService,
     private commonHelper: CommonHelper, private plansService: PlansService,  private merchantService: MerchantService, private modalService: BsModalService,private sanitizer: DomSanitizer) { super(modalRef); }
@@ -71,10 +71,10 @@ export class UpdateMerchantModalComponent extends BaseModalComponent implements 
   updateSlider(){
     const data = new FormData();
     if(this.newLicenceImageUploaded){
-      data.append('licence_proof', this.slider_obj.licence_proof_File);
+      data.append('valid_ID', this.slider_obj.valid_ID_File);
     }
-    if(this.newUtilityImageUploaded){
-      data.append('utility_proof', this.slider_obj.utility_proof_File);
+    if(this.newTINCardImageUploaded){
+      data.append('TIN_card', this.slider_obj.TIN_card_File);
     }
     if(this.newAddressImageUploaded){
       data.append('address_proof', this.slider_obj.address_proof_File);
@@ -128,19 +128,19 @@ export class UpdateMerchantModalComponent extends BaseModalComponent implements 
   }
 
   clearLicenceCLFile() {
-    this.licence_proof_File.nativeElement.value = '';
-    this.slider_obj.licence_proof_Url = '';
-    this.slider_obj.licence_proof_File = null;
+    this.valid_ID_File.nativeElement.value = '';
+    this.slider_obj.valid_ID_Url = '';
+    this.slider_obj.valid_ID_File = null;
     this.newLicenceImageUploaded = false;
   }
 
   onLicenceCLUpload(event) {
     if (event.target.files && event.target.files[0]) {
       this.newLicenceImageUploaded = true;
-      this.slider_obj.licence_proof_Url = this.sanitizer.bypassSecurityTrustUrl(
+      this.slider_obj.valid_ID_Url = this.sanitizer.bypassSecurityTrustUrl(
         URL.createObjectURL(event.target.files[0])
       );
-      this.slider_obj.licence_proof_File = event.target.files[0];
+      this.slider_obj.valid_ID_File = event.target.files[0];
     }
   }
 
@@ -160,20 +160,20 @@ export class UpdateMerchantModalComponent extends BaseModalComponent implements 
       this.slider_obj.address_proof_File = event.target.files[0];
     }
   }
-  clearUtilityCLFile() {
-    this.utility_proof_File.nativeElement.value = '';
-    this.slider_obj.utility_proof_Url = '';
-    this.slider_obj.utility_proof_File = null;
-    this.newUtilityImageUploaded = false;
+  clearTINCardCLFile() {
+    this.TIN_card_File.nativeElement.value = '';
+    this.slider_obj.TIN_card_Url = '';
+    this.slider_obj.TIN_card_File = null;
+    this.newTINCardImageUploaded = false;
   }
 
-  onUtilityCLUpload(event) {
+  onTINCardCLUpload(event) {
     if (event.target.files && event.target.files[0]) {
-      this.newUtilityImageUploaded = true;
-      this.slider_obj.utility_proof_Url = this.sanitizer.bypassSecurityTrustUrl(
+      this.newTINCardImageUploaded = true;
+      this.slider_obj.TIN_card_Url = this.sanitizer.bypassSecurityTrustUrl(
         URL.createObjectURL(event.target.files[0])
       );
-      this.slider_obj.utility_proof_File = event.target.files[0];
+      this.slider_obj.TIN_card_File = event.target.files[0];
     }
   }
 }

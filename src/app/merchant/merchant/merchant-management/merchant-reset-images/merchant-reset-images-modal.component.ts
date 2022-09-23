@@ -26,7 +26,7 @@ export class MerchantResetImagesModalComponent extends BaseModalComponent implem
   product_options_list = []
   collection_data = []
   dialogResult: any;
-  imagesList = [{id:"licence_proof",name:"Licence"},{id:"address_proof",name:"Address"},{id:"utility_proof",name:"Utility"},
+  imagesList = [{id:"valid_ID",name:"Licence"},{id:"address_proof",name:"Address"},{id:"TIN_card",name:"TIN Card"},
   {id:"upgraded_image1",name:"Extra Uploaded 1"},{id:"upgraded_image2",name:"Extra Uploaded 2"},{id:"upgraded_image3",name:"Extra Uploaded 3"},{id:"upgraded_image4",name:"Extra Uploaded 4"}]
 
 
